@@ -27,11 +27,7 @@ int main() {
 
 	setX(counter, 8);
 	cout << "counter.x after call to setX friend function: ";
-	counter.print();
-
-	setX(counter, 5);
-	cout << "counter.x after call to setX friend function: ";
-	counter.print();
+	counter.print();	
 
 	system("pause");
 	return 0;
