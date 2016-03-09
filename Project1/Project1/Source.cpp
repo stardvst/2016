@@ -3,38 +3,26 @@
 #include <iostream>
 using namespace std;
 
-class Triangle {
+class Date {
 public:
-	Triangle() {};
-	~Triangle() {};
-	void setBase(double b) {
-		base = b;
-	}
-	void setHeight(double h) {
-		height = h;
+	Date() {};
+	Date(int = 1, int = 1, int = 1900) {};
+	void show() {
+		cout << day << '/' << month << '/' << year << '\n';
 	}
 private:
-	double base;
-	double height;
+	int day;
+	int month;
+	int year;
 };
-
-Triangle input() {
-	Triangle object;
-	double b, h;
-	cout << "Enter base: ";
-	cin >> b;
-	object.setHeight(b);
-	cout << "Enter height: ";
-	cin >> h;
-	object.setHeight(h);
-	cout << "S = (base * height) / 2 = " << (b * h) / 2 << "\n";
-	return object;
-}
 
 int main() {
 	
-	Triangle t1 = input();
-	
+	Date ob;
+	Date ob1 = ob;
+
+	cout << "ob: " << ob.show();
+
 	system("pause");
 	return 0;
 }
