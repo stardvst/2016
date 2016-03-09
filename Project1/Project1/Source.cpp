@@ -3,32 +3,28 @@
 #include <iostream>
 using namespace std;
 
-class Count {
-	friend void setX(Count &, int);
+class Test {
 public:
-	Count() : x(0) {};
-	void print() const {
-		cout << x << endl;
-	}
+	Test(int = 0);
+	void print() const;
 private:
 	int x;
 };
 
-void setX(Count &count, int val) {
-	count.x = val;
+Test::Test(int value) : x(value) {};
+
+void Test::print() const {
+	cout << "x = " << x << endl; // uses the this pointer implicitly
+	cout << "this->x = " << this->x << endl;
+	cout << "(*this).x = " << (*this).x << endl;
 }
+
 
 int main() {
 
-	Count counter;
-
-	cout << "counter.x after instantiation: ";
-	counter.print();
-
-	setX(counter, 8);
-	cout << "counter.x after call to setX friend function: ";
-	counter.print();	
-
+	Test testObject(12);
+	testObject.print();
+	
 	system("pause");
 	return 0;
 }
