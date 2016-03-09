@@ -3,25 +3,52 @@
 #include <iostream>
 using namespace std;
 
-class Date {
+class Stack {
 public:
-	Date() {};
-	Date(int = 1, int = 1, int = 1900) {};
+	void push(char c) {
+
+	}
+	char pop() {
+
+	}
+	void input() {
+
+	}
 	void show() {
-		cout << day << '/' << month << '/' << year << '\n';
+
+	}
+	void instructions() {
+		cout << "Enter your choice:\n" <<
+			"   1 to insert an element into the stack.\n"
+			"   2 to delete an element from the stack.\n"
+			"   3 to end.\n";
 	}
 private:
-	int day;
-	int month;
-	int year;
+	char c;
+	Stack *next;
 };
 
 int main() {
 	
-	Date ob;
-	Date ob1 = ob;
+	Stack stack;
+	Stack *top = &stack;
+	int choice;
+	char value;
 
-	cout << "ob: " << ob.show();
+	stack.instructions();
+	cin >> choice;
+
+	while (choice != 3) {
+		switch (choice) {
+			case 1: 
+				cout << "Enter a char: ";
+				cin >> value;
+				stack.push(value);
+				break;
+			case 2:
+
+		}
+	}
 
 	system("pause");
 	return 0;
