@@ -3,19 +3,17 @@
 
 class Time {
 public:
-	Time(int = 0, int = 0, int = 0);
-	
-	Time &setTime(int, int, int);
-	Time &setHour(int);
-	Time &setMinute(int);
-	Time &setSecond(int);
-
-	int getHour() const;
-	int getMinute() const;
-	int getSecond() const;
-
-	void printUniversal() const;
-	void printStandard() const;
+	Time(int = 0, int = 0, int = 0);;
+	void setTime(int, int, int);
+	void setHour(int);
+	void setMinute(int);
+	void setSecond(int);
+	int getHour();
+	int getMinute();
+	int getSecond();
+	void tick();
+	void printUniversal();
+	void printStandard();
 private:
 	int hour;
 	int minute;
