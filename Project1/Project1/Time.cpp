@@ -1,10 +1,17 @@
+#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_NONSTDC_NO_DEPRECATE
 #include <iostream>
 #include <iomanip>
+#include <ctime>
 #include "Time.h"
 using namespace std;
 
 Time::Time(int h, int m, int s) {
-	setTime(h, m, s);
+	time_t rawtime;
+	struct tm *info;
+	time(&rawtime);
+	info = localtime(&rawtime);
+	setTime(info->tm_hour, info->tm_min, info->tm_sec);
 }
 
 Time &Time::setTime(int h, int m, int s) {
