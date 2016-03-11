@@ -1,31 +1,17 @@
 #define _CRT_SECURE_NO_WARNINGS
 #define _CRT_NONSTDC_NO_DEPRECATE
 #include <iostream>
-#include "Time.h"
+#include "Rectangle.h"
 using namespace std;
 
 
 int main() {
 	
-	Time t(11,59,59);
-	cout << "Current time: ";
-	t.printStandard();
-	t.tick();
+	Rectangle r1(2, 3);
+	cout << "Area: " << r1.area() << "\nPerimeter: " << r1.perimeter() << "\n\n";
 
-	t.setTime(23, 59, 59);
-	cout << "Current time: ";
-	t.printStandard();
-	t.tick();
-
-	t.setTime(10, 59, 59);
-	cout << "Current time: ";
-	t.printStandard();
-	t.tick();
-
-	t.setTime(10, 35, 59);
-	cout << "Current time: ";
-	t.printStandard();
-	t.tick();
+	Rectangle r2(-5, 25);
+	cout << "Area: " << r2.area() << "\nPerimeter: " << r2.perimeter() << '\n';
 
 	system("pause");
 	return 0;
