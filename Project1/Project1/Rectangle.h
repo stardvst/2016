@@ -3,17 +3,23 @@
 
 class Rectangle {
 public:
-	Rectangle(double = 1, double = 1);
-	void setLength(double);
-	void setWidth(double);
-	double getLength();
-	double getWidth();
-	double perimeter() const;
-	double area() const;
+	Rectangle();
+	void setRectangle();
+	double calculateLength() const;
+	double calculateWidth() const;
+	double calculatePerimeter() const;
+	double calculateArea() const;
+	bool isSquare();
 	~Rectangle();
 private:
-	double length;
-	double width;
+	int x1;
+	int y1;
+	int x2;
+	int y2;
+	int x3;
+	int y3;
+	int x4;
+	int y4;
 };
 
 #endif // !RECTANGLE_H
