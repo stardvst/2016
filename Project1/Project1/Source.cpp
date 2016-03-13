@@ -6,13 +6,14 @@ using namespace std;
 
 int main() {
 	
-	Date d(28,2,2016);
-	cout << "Date: ";
-	d.print();
-	d.nextDay();
-	cout << "Next day is: ";
-	d.print(); 
-	cout << endl;
+	//Date d(11,2,2016);
+	//Date d(125, 2016);
+	//Date d(125, 2015);
+	//Date d(366, 2015);
+	Date d; // is initialized by the system
+	d.formatDDDYYYY();
+	d.formatMMDDYY();
+	d.displayInTextFormat();
 
 	system("pause");
 	return 0;

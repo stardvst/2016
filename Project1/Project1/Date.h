@@ -3,9 +3,12 @@
 
 class Date {
 public:
-	Date(int = 1, int = 1, int = 2000);
-	void nextDay();
-	void print();
+	Date(); 
+	Date(int, int, int);
+	Date(int, int);
+	void formatDDDYYYY() const;
+	void formatMMDDYY() const;
+	void displayInTextFormat() const;
 private:
 	int day;
 	int month;
