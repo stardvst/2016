@@ -42,7 +42,6 @@ void Time::tick() {
 		if (hour < 23) {
 			hour++;
 			minute = second = 0;
-
 		}
 		else {
 			hour = minute = second = 0;

@@ -4,19 +4,18 @@
 class Rational {
 public:
 	Rational(int = 1, int = 1);
-	~Rational();
-	int getNumerator();
-	int getDenominator();
-	void add(Rational);
-	void subtract(Rational);
-	void multiply(Rational);
-	void divide(Rational);
-	void printRational () const;
-	void printFloating() const;
+	int getNumerator() const;
+	int getDenominator() const;
+	Rational add(const Rational &) const;
+	Rational subtract(const Rational &) const;
+	Rational multiply(const Rational &) const;
+	Rational divide(const Rational &) const;
+	void printRational();
+	void printFloating() const; 
 private:
 	int numerator;
 	int denominator;
-	static void reduce(int, int);
+	void reduceTheFraction(int, int);
 };
 
 #endif // !RATIONAL_H

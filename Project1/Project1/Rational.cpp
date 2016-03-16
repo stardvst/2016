@@ -2,54 +2,61 @@
 #include "Rational.h"
 
 Rational::Rational(int n, int d) {
-	reduce(n, d);
 	numerator = n;
 	denominator = d;
+	reduceTheFraction(n, d);
 }
 
-Rational::~Rational() {};
-
-int Rational::getNumerator() {
+int Rational::getNumerator() const {
 	return numerator;
 }
 
-int Rational::getDenominator() {
+int Rational::getDenominator() const {
 	return denominator;
 }
 
-void Rational::add(Rational rat) {
-	
+Rational Rational::add(const Rational &fraction) const {
+	return Rational(numerator*fraction.denominator + denominator*fraction.numerator,
+		denominator*fraction.denominator);
 }
 
-void Rational::subtract(Rational rat) {
-
+Rational Rational::subtract(const Rational &fraction) const {
+	return Rational(numerator*fraction.denominator - denominator*fraction.numerator,
+		denominator*fraction.denominator);
 }
 
-void Rational::multiply(Rational fraction) {
-	numerator *= fraction.getNumerator;
-	denominator *= fraction.getDenominator;
-	reduce(numerator, denominator);
+Rational Rational::multiply(const Rational &fraction) const {
+	return Rational(numerator * fraction.numerator, denominator * fraction.denominator);
 }
 
-void Rational::divide(Rational fraction) {
-	numerator *= fraction.getDenominator;
-	denominator *= fraction.getNumerator;
-	reduce(numerator, denominator);
+Rational Rational::divide(const Rational &fraction) const {
+	return Rational(numerator * fraction.denominator, denominator * fraction.numerator);
 }
 
-void Rational::printRational() const {
+void Rational::printRational() {
+	reduceTheFraction(numerator, denominator);
 	std::cout << "Fraction is " << numerator << "/" << denominator << "\n";
 }
 
 void Rational::printFloating() const {
-	std::cout << "In floating-point format: " << numerator / denominator << "\n";
+	std::cout << "In floating-point format: " << (double)numerator / denominator << "\n";
 }
 
-void Rational::reduce(int n, int d) {
-	int i = 2;
-	while (n % i == 0 && d % i == 0) {
-		n /= i;
-		d /= i;
-		i++;
+void Rational::reduceTheFraction(int n, int d) {
+	int low, high;
+	if (n > d) {
+		low = d;
+		high = n;
+	} else {
+		high = d;
+		low = n;
 	}
+	for (int i = low; i > 0; i--) {
+		if ((low%i == 0) && (high%i == 0)) {
+			n /= i;
+			d /= i;
+		}
+	}
+	numerator = n;
+	denominator = d;
 }
