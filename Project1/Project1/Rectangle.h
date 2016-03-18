@@ -20,7 +20,10 @@ public:
 	bool isSquare() const;
 
 private:
-	Point topLeft, topRight, bottomLeft, bottomRight;
+	Point topLeft;
+	Point topRight;
+	Point bottomLeft;
+	Point bottomRight;
 };
 
 #endif // !RECTANGLE_H
