@@ -10,12 +10,11 @@ public:
 	Rational subtract(const Rational &) const;
 	Rational multiply(const Rational &) const;
 	Rational divide(const Rational &) const;
-	void printRational();
+	void printRational() const;
 	void printFloating() const; 
 private:
 	int numerator;
 	int denominator;
-	void reduceTheFraction(int, int);
 };
 
 #endif // !RATIONAL_H
