@@ -2,22 +2,23 @@
 #include "Rectangle.h"
 
 Rectangle::Rectangle(Point TLeft, Point TRight, Point BLeft, Point BRight) {
-	if (TLeft.getX() >= 0 && TLeft.getX() <= 20.0 && 
+	if (TLeft.getX() >= 0 && TLeft.getX() <= 20.0 &&
 		TLeft.getY() >= 0 && TLeft.getY() <= 20.0 &&
 		TRight.getX() >= 0 && TRight.getX() <= 20.0 &&
 		TRight.getY() >= 0 && TRight.getY() <= 20.0 &&
 		BLeft.getX() >= 0 && BLeft.getX() <= 20.0 &&
 		BLeft.getY() >= 0 && BLeft.getY() <= 20.0 &&
-		BRight.getX() >= 0 && BRight.getX() <= 20.0 && 
+		BRight.getX() >= 0 && BRight.getX() <= 20.0 &&
 		BLeft.getY() >= 0 && BLeft.getY() <= 20.0) {
 		topLeft = TLeft;
 		topRight = TRight;
 		bottomLeft = BLeft;
 		bottomRight = BRight;
-	} else {
+	}
+	else {
 		std::cout << "x and y coordinates should be >= 0 && <= 20.\n";
 	}
-	
+
 	if (TLeft.getX() != BLeft.getX()) {
 		std::cout << "Top left and bottom left must have the same x value.\n";
 	}
@@ -66,7 +67,8 @@ double Rectangle::calculateArea() const {
 bool Rectangle::isSquare() const {
 	if (this->calculateHeight() == this->calculateWidth()) {
 		return true;
-	} else {
+	}
+	else {
 		return false;
 	}
 }
