@@ -72,3 +72,26 @@ bool Rectangle::isSquare() const {
 		return false;
 	}
 }
+
+void Rectangle::draw() const {
+	char fill = setFillCharacter();
+	char border = setPerimeterCharacter();
+	int box[25][25];
+
+	for (int i = 0; i < 25; i++) {
+		for (int j = 0; j < 25; j++) {
+			box[i, j] = ' ';
+		}
+	}
+
+	for (int i = 25 - topLeft.getY(); i <= 24 - bottomLeft.getX(); i++) {
+		for (int j = topLeft.getX(); j <= topRight.getX(); j++) {
+			if (i == 25 - topLeft.getY() || i == 24 - bottomLeft.getX() ||
+				j == topLeft.getX() || j == topRight.getX()) {
+				box[i, j] = border;
+			} else {
+				box[i, j] = fill;
+			}
+		}
+	}
+}

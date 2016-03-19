@@ -4,8 +4,6 @@
 class Rational {
 public:
 	Rational(int = 1, int = 1);
-	int getNumerator() const;
-	int getDenominator() const;
 	Rational add(const Rational &) const;
 	Rational subtract(const Rational &) const;
 	Rational multiply(const Rational &) const;

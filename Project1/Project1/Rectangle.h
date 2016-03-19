@@ -20,6 +20,12 @@ public:
 
 	bool isSquare() const;
 
+	void draw() const;
+	char setFillCharacter() const;
+	char setPerimeterCharacter() const;
+	int scaleTheRectangle();
+	void rotateTheRectangle();
+	void moveTheRectangle();
 private:
 	Point topLeft;
 	Point topRight;

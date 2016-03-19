@@ -2,31 +2,22 @@
 #include "Rational.h"
 
 Rational::Rational(int n, int d) {
-	int low, high;
-	if (n > d) {
-		low = d;
-		high = n;
+	if (d == 0) {
+		std::cout << "Divison by zero not allowed.\nDenemonator defaulted to 1.\n";
+		d = 1;
 	}
-	else {
-		high = d;
-		low = n;
+	int low = (n > d) ? d : n;
+	if (low < 0) {
+		low = -low;
 	}
-	for (int i = low; i > 0; i--) {
-		if ((low%i == 0) && (high%i == 0)) {
+	for (int i = low; i > 1; i--) {
+		if ((n % i == 0) && (d % i == 0)) {
 			n /= i;
 			d /= i;
 		}
 	}
 	numerator = n;
 	denominator = d;
-}
-
-int Rational::getNumerator() const {
-	return numerator;
-}
-
-int Rational::getDenominator() const {
-	return denominator;
 }
 
 Rational Rational::add(const Rational &fraction) const {
