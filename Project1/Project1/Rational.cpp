@@ -2,22 +2,41 @@
 #include "Rational.h"
 
 Rational::Rational(int n, int d) {
+	int sign = 1, gcd, low;
+	// determine the sign
+	if (n < 0 && d < 0) {
+		n = -n; d = -d;
+	}
+	else if (n < 0) {
+		n = -n;
+		sign = -1;
+	}
+	else if (d < 0) {
+		d = -d;
+		sign = -1;
+	}
+	// if denom is 0
 	if (d == 0) {
 		std::cout << "Divison by zero not allowed.\nDenemonator defaulted to 1.\n";
 		d = 1;
+	} 
+	// find gcd
+	if (n < d) {
+		low = n;
+		gcd = d;
 	}
-	int low = (n > d) ? d : n;
-	if (low < 0) {
-		low = -low;
+	else {
+		low = d;
+		gcd = n;
 	}
-	for (int i = low; i > 1; i--) {
-		if ((n % i == 0) && (d % i == 0)) {
-			n /= i;
-			d /= i;
-		}
+	while (low != 0) {
+		int temp = gcd % low;
+		gcd = low;
+		low = temp;
 	}
-	numerator = n;
-	denominator = d;
+	// divide original values by their gcd 
+	numerator = (n / gcd) * sign; 
+	denominator = d / gcd;
 }
 
 Rational Rational::add(const Rational &fraction) const {
