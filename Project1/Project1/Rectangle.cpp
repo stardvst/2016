@@ -128,9 +128,11 @@ void Rectangle::scaleWidth(int coordinate) {
 	bottomRight.setX(bottomRight.getX() + coordinate);
 }
 
-void Rectangle::rotateTheRectangle() {
+bool Rectangle::rotateTheRectangle() {
 	if ((bottomLeft.getX() + (topRight.getY() - bottomRight.getY()) > 25) ||
 		(bottomLeft.getY() + (topRight.getX() - topLeft.getX() > 25))) {
+		std::cout << "Coordinates are out of borders. The rectangle won't be rotated.\n\n";
+		return false;
 	}
 	else {
 		bottomLeft.setX(bottomRight.getX());
@@ -141,13 +143,15 @@ void Rectangle::rotateTheRectangle() {
 		topLeft.setX(bottomLeft.getX());
 		topRight.setX(bottomRight.getX());
 		topRight.setY(topLeft.getY());
+		return true;
 	}
 }
 
-void Rectangle::moveTheRectangle(int xChange, int yChange) {
+bool Rectangle::moveTheRectangle(int xChange, int yChange) {
 	if ((topRight.getX() + xChange > 25) || (topRight.getY() + yChange > 25) ||
 		(bottomLeft.getX() + xChange) || (bottomLeft.getY() + yChange)) {
 		std::cout << "Coordinates are out of borders. The rectangle won't be moved.\n\n";
+		return false;
 	}
 	else {
 		bottomLeft.setX(bottomLeft.getX() + xChange);
@@ -158,6 +162,7 @@ void Rectangle::moveTheRectangle(int xChange, int yChange) {
 		topLeft.setY(topLeft.getY() + yChange);
 		topRight.setX(topRight.getX() + xChange);
 		topRight.setY(topRight.getY() + yChange);
+		return true;
 	}
 }
 

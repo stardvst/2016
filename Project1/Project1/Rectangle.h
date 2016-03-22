@@ -24,8 +24,8 @@ public:
 	char setBorderCharacter() const;
 	void scaleHeight(int);
 	void scaleWidth(int);
-	void rotateTheRectangle();
-	void moveTheRectangle(int, int);
+	bool rotateTheRectangle();
+	bool moveTheRectangle(int, int);
 private:
 	Point topLeft;
 	Point topRight;
