@@ -26,6 +26,14 @@ Rectangle::Rectangle(Point TLeft, Point TRight, Point BLeft, Point BRight) {
 	if (TRight.getX() != BRight.getX()) {
 		std::cout << "Top right and bottom right must have the same x value.\n";
 	}
+
+	if (TLeft.getY() != TRight.getY()) {
+		std::cout << "Top left and top right must have the same y value.\n";
+	}
+
+	if (BLeft.getY() != BRight.getY()) {
+		std::cout << "Bottom left and bottom right must have the same y value.\n";
+	}
 }
 
 Point Rectangle::getTopLeft() const {
@@ -74,24 +82,95 @@ bool Rectangle::isSquare() const {
 }
 
 void Rectangle::draw() const {
-	char fill = setFillCharacter();
-	char border = setPerimeterCharacter();
-	int box[25][25];
+	const char fill = setFillCharacter();
+	const char border = setBorderCharacter();
+	char box[26][26];
 
-	for (int i = 0; i < 25; i++) {
-		for (int j = 0; j < 25; j++) {
-			box[i, j] = ' ';
+	for (int i = 0; i < 26; i++) {
+		for (int j = 0; j < 26; j++) {
+			box[i][j] = ' ';
+			box[i][0] = '|';
+			box[25][j] = '-';
 		}
 	}
 
-	for (int i = 25 - topLeft.getY(); i <= 24 - bottomLeft.getX(); i++) {
-		for (int j = topLeft.getX(); j <= topRight.getX(); j++) {
-			if (i == 25 - topLeft.getY() || i == 24 - bottomLeft.getX() ||
-				j == topLeft.getX() || j == topRight.getX()) {
-				box[i, j] = border;
-			} else {
-				box[i, j] = fill;
+	box[0][0] = '^';
+	box[25][0] = '+';
+	box[25][25] = '>';
+
+	for (int i = 25 - topLeft.getY(); i < 25 - bottomLeft.getY(); i++) {
+		for (int j = topLeft.getX() + 1; j < topRight.getX() + 1; j++) {
+			if ((i == (25 - topLeft.getY())) || (i == (24 - bottomLeft.getY())) ||
+				(j == topLeft.getX() + 1) || (j == topRight.getX())) {
+				box[i][j] = border;
+			}
+			else {
+				box[i][j] = fill;
 			}
 		}
 	}
+
+	for (int i = 0; i < 26; i++) {
+		for (int j = 0; j < 26; j++) {
+			std::cout << box[i][j];
+		}
+		std::cout << std::endl;
+	}
+}
+
+void Rectangle::scaleHeight(int coordinate) {
+	topLeft.setY(topLeft.getY() + coordinate);
+	topRight.setY(topRight.getY() + coordinate);
+}
+
+void Rectangle::scaleWidth(int coordinate) {
+	topRight.setX(topRight.getX() + coordinate);
+	bottomRight.setX(bottomRight.getX() + coordinate);
+}
+
+void Rectangle::rotateTheRectangle() {
+	if ((bottomLeft.getX() + (topRight.getY() - bottomRight.getY()) > 25) ||
+		(bottomLeft.getY() + (topRight.getX() - topLeft.getX() > 25))) {
+	}
+	else {
+		bottomLeft.setX(bottomRight.getX());
+		bottomLeft.setY(bottomRight.getY());
+		bottomRight.setX(bottomLeft.getX() + (topRight.getY() - bottomRight.getY()));
+		bottomRight.setY(bottomLeft.getY());
+		topLeft.setY(bottomLeft.getY() + (topRight.getX() - topLeft.getX()));
+		topLeft.setX(bottomLeft.getX());
+		topRight.setX(bottomRight.getX());
+		topRight.setY(topLeft.getY());
+	}
+}
+
+void Rectangle::moveTheRectangle(int xChange, int yChange) {
+	if ((topRight.getX() + xChange > 25) || (topRight.getY() + yChange > 25) ||
+		(bottomLeft.getX() + xChange) || (bottomLeft.getY() + yChange)) {
+		std::cout << "Coordinates are out of borders. The rectangle won't be moved.\n\n";
+	}
+	else {
+		bottomLeft.setX(bottomLeft.getX() + xChange);
+		bottomLeft.setY(bottomLeft.getY() + yChange);
+		bottomRight.setX(bottomRight.getX() + xChange);
+		bottomRight.setY(bottomRight.getY() + yChange);
+		topLeft.setX(topLeft.getX() + xChange);
+		topLeft.setY(topLeft.getY() + yChange);
+		topRight.setX(topRight.getX() + xChange);
+		topRight.setY(topRight.getY() + yChange);
+	}
+}
+
+char Rectangle::setFillCharacter() const {
+	char fill;
+	std::cout << "Enter a fill character: ";
+	std::cin >> fill;
+	return fill;
+}
+
+char Rectangle::setBorderCharacter() const {
+	char border;
+	std::cout << "Enter a border character: ";
+	std::cin >> border;
+	return border;
 }
