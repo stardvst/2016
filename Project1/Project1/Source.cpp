@@ -1,23 +1,36 @@
 #include <iostream>
-#include "PhoneNumber.h"
+#include "HugeInteger.h"
 using namespace std;
 
 int main() {
 
-	PhoneNumber phone;
+	HugeInteger h1;
+	h1.input();
 
-	cout << "Enter phone number in the form (123) 456-7890:" << endl;
+	HugeInteger h2;
+	h2.input();
 
-	// cin >> phone invokes operator>> by implicitly issuing
-	// the global function call operator>>( cin, phone )
-	cin >> phone;
+	HugeInteger h3 = h1.add(h2);
+	cout << "h1 + h2 =\n";
+	h3.output();
 
-	cout << "The phone number entered was: ";
+	h3 = h1.subtract(h2);
+	cout << "h1 - h2 =\n";
+	h3.output();
 
-	// cout << phone invokes operator<< by implicitly issuing
-	// the global function call operator<<( cout, phone )
-	cout << phone;
-	
+	h3 = h1.multiply(h2);
+	cout << "h1 * h2 =\n";
+	h3.output();
+
+	cout << "h1 / h2 =\n";
+	h3 = h1.divide(h2);
+	h3.output();
+
+	cout << "h1 % h2 =\n";
+	h3 = h1.modulus(h2);
+	h3.output();
+
+
 	system("pause");
 	return 0;
 }
