@@ -1,4 +1,3 @@
-
 #ifndef RECTANGLE_H
 #define RECTANGLE_H
 
@@ -22,10 +21,11 @@ public:
 
 	void draw() const;
 	char setFillCharacter() const;
-	char setPerimeterCharacter() const;
-	int scaleTheRectangle();
+	char setBorderCharacter() const;
+	void scaleHeight(int);
+	void scaleWidth(int);
 	void rotateTheRectangle();
-	void moveTheRectangle();
+	void moveTheRectangle(int, int);
 private:
 	Point topLeft;
 	Point topRight;
