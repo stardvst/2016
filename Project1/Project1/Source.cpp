@@ -1,35 +1,59 @@
 #include <iostream>
-#include "HugeInteger.h"
+#include "Array.h"
 using namespace std;
 
 int main() {
+	
+	Array integers1(7); // seven-element Array
+	Array integers2; // 10-element Array by default
 
-	HugeInteger h1;
-	h1.input();
+	cout << "Size of Array integers1 is "
+		<< integers1.getSize() << 
+		"\nArray after initialization:\n" << integers1;
 
-	HugeInteger h2;
-	h2.input();
+	cout << "Size of Array integers2 is "
+		<< integers2.getSize() <<
+		"\nArray after initialization:\n" << integers2;
 
-	HugeInteger h3 = h1.add(h2);
-	cout << "h1 + h2 =\n";
-	h3.output();
+	cout << "\nEnter 17 integers:" << endl;
+	cin >> integers1 >> integers2;
 
-	h3 = h1.subtract(h2);
-	cout << "h1 - h2 =\n";
-	h3.output();
+	cout << "\nAfter input, the Arrays contain:\n"
+		<< "integers1:\n" << integers1 
+		<< "\nintegers2:\n" << integers2;
 
-	h3 = h1.multiply(h2);
-	cout << "h1 * h2 =\n";
-	h3.output();
+	cout << "\nEvaluating: integers1 != integers2" << endl;
+	if (integers1 != integers2) {
+		cout << "integers1 and integers2 are not equal" << endl;
+	}
 
-	cout << "h1 / h2 =\n";
-	h3 = h1.divide(h2);
-	h3.output();
+	// create Array integers3 using integers1 as an
+	// initializer; print size and contents
+	Array integers3(integers1); // invokes copy constructor
+	cout << "Size of Array integers3 is "
+		<< integers3.getSize() <<
+		"\nArray after initialization:\n" << integers3;
 
-	cout << "h1 % h2 =\n";
-	h3 = h1.modulus(h2);
-	h3.output();
+	cout << "\nAssigning integers2 to integers1:" << endl; // use overloaded assignment (=) operator
+	integers1 = integers2;
 
+	cout << "integers1:\n" << integers1
+		<< "\nintegers2:\n" << integers2;
+
+	// use overloaded equality (==) operator
+	cout << "\nEvaluating: integers1 == integers2" << endl;
+	if (integers1 == integers2) {
+		cout << "integers1 and integers2 are equal" << endl;
+	}
+
+	// use overloaded subscript operator to create lvalue
+	cout << "\n\nAssigning 1000 to integers1[5]" << endl;
+	integers1[5] = 1000;
+	cout << "integers1:\n" << integers1;
+
+	// attempt to use out-of-range subscript
+	cout << "\nAttempt to assign 1000 to integers1[15]" << endl;
+	integers1[15] = 1000; // ERROR: out of range
 
 	system("pause");
 	return 0;
