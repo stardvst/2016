@@ -14,6 +14,7 @@ public:
 	void tick();
 	void printUniversal();
 	void printStandard();
+	int secondsSinceMidnight() const;
 private:
 	int hour;
 	int minute;

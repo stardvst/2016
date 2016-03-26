@@ -71,3 +71,7 @@ void Time::printStandard() {
 		<< setw(2) << getMinute() << ":" << setw(2) << getSecond() 
 		<< (hour < 12 ? " AM" : " PM") << "\n";
 }
+
+int Time::secondsSinceMidnight() const {
+	return hour * 60 * 60 + minute * 60 + second;
+}
