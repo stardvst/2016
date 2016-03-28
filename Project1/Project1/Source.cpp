@@ -1,15 +1,22 @@
-#define _CRT_SECURE_NO_WARNINGS
-#define _CRT_NONSTDC_NO_DEPRECATE
 #include <iostream>
-#include "Time.h"
+#include "DeckOfCards.h"
 using namespace std;
 
 
 int main() {
 
-	Time t(1, 1, 15);
-	cout << "Seconds since midnight: " << t.secondsSinceMidnight() << endl;
-
+	DeckOfCards deck1;
+	deck1.shuffle();
+	for (int i = 0; i < 53; i++) {
+		if (!deck1.moreCards()) {
+			cout << "Card " << i + 1 << " is " << deck1.dealCard().toString()
+				<< endl;
+		}
+		else {
+			cout << "No more cards to deal.\n";
+		}
+	}
+	
 	system("pause");
 	return 0;
 }
