@@ -1,22 +1,15 @@
 #include <iostream>
-#include "DeckOfCards.h"
+#include "Flight.h"
 using namespace std;
 
 
 int main() {
 
-	DeckOfCards deck1;
-	deck1.shuffle();
-	for (int i = 0; i < 53; i++) {
-		if (!deck1.moreCards()) {
-			cout << "Card " << i + 1 << " is " << deck1.dealCard().toString()
-				<< endl;
-		}
-		else {
-			cout << "No more cards to deal.\n";
-		}
-	}
-	
+	Time dep(12, 14, 0);
+	Time arr(4, 14, 00);
+	Flight flight1(CLIMBING, "Armavia", "ASD-5686", "KT-209A", 12000, 1000,
+		"North", 13265, dep, arr, "BOS", "LAX");
+	flight1.changeAltitude(17000);
 	system("pause");
 	return 0;
 }
