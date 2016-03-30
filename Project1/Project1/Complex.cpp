@@ -1,50 +1,48 @@
 #include <iostream>
 #include "Complex.h"
 
-Complex::Complex(double real, double imaginary) {
-	setComplexNumber(real, imaginary);
+Complex::Complex(double realPart, double imaginaryPart)
+	:real(realPart), imaginary(imaginaryPart) {
+	// empty body
 }
 
-Complex::~Complex() {}
-
-void Complex::setComplexNumber(double real, double imaginary) {
-	setRealPart(real);
-	setImaginaryPart(imaginary);
+Complex Complex::operator+(const Complex &operand2) const {
+	return Complex(real + operand2.real, imaginary + operand2.imaginary);
 }
 
-void Complex::setRealPart(double real) {
-	realPart = real;
+Complex Complex::operator-(const Complex &operand2) const {
+	return Complex(real - operand2.real, imaginary - operand2.imaginary);
 }
 
-void Complex::setImaginaryPart(double imaginary) {
-	imaginaryPart = imaginary;
+Complex Complex::operator*(const Complex &operand2) const {
+	return Complex(real * operand2.real - imaginary * operand2.imaginary,
+		real * operand2.imaginary + imaginary * operand2.real);
 }
 
-double Complex::getRealPart() {
-	return realPart;
+bool Complex::operator==(const Complex &operand2) const {
+	if (real == operand2.real && imaginary == operand2.imaginary) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
-double Complex::getImaginaryPart() {
-	return imaginaryPart;
+bool Complex::operator!=(const Complex &operand2) const {
+	if (real != operand2.real || imaginary != operand2.imaginary) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
-void Complex::add(Complex complex2) {
-	std::cout << "(" << realPart << " + " << imaginaryPart << "i) + "
-		<< "(" << complex2.getRealPart() << " + " << complex2.getImaginaryPart() << "i)" <<
-		" = " << realPart + complex2.getRealPart() << 
-		(imaginaryPart - complex2.getImaginaryPart() > 0 ? " + " : " - ")  <<
-		abs(imaginaryPart + complex2.getImaginaryPart()) << "i" << "\n";
+istream &operator>>(istream &input, Complex &number) {
+	input >> number.real >> number.imaginary;
+	return input;
 }
 
-void Complex::subtract(Complex complex2) {
-	std::cout << "(" << realPart << " + " << imaginaryPart << "i) - "
-		<< "(" << complex2.getRealPart() << " + " << 
-		complex2.getImaginaryPart() << "i)" <<
-		" = " << realPart - complex2.getRealPart() << 
-		(imaginaryPart - complex2.getImaginaryPart() > 0  ? " + " : " - ") <<
-		abs(imaginaryPart - complex2.getImaginaryPart()) << "i" << "\n";
-}
-
-void Complex::print() const {
-	std::cout << "Complex number is " << "(" << realPart << ", " << imaginaryPart << ")" << "\n";
+ostream &operator<<(ostream &output, const Complex &number) {
+	output << '(' << number.real << ", " << number.imaginary << ')';
+	return output;
 }

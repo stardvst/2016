@@ -1,21 +1,22 @@
 #ifndef COMPLEX_H
 #define COMPLEX_H
 
+using std::ostream;
+using std::istream;
+
 class Complex {
+	friend ostream &operator<<(ostream &, const Complex &);
+	friend istream &operator>>(istream &, Complex &);
 public:
-	Complex(double = 1, double = 1);
-	~Complex();
-	void setComplexNumber(double, double);
-	void setRealPart(double);
-	void setImaginaryPart(double);
-	double getRealPart();
-	double getImaginaryPart();
-	void add(Complex);
-	void subtract(Complex);
-	void print() const;
+	Complex(double = 0.0, double = 0.0);
+	Complex operator+(const Complex &) const;
+	Complex operator-(const Complex &) const;
+	Complex operator*(const Complex &) const;
+	bool operator==(const Complex &) const;
+	bool operator!=(const Complex &) const;
 private:
- 	double realPart;
-	double imaginaryPart;
+ 	double real;
+	double imaginary;
 };
 
 #endif // !COMPLEX_H
