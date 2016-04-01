@@ -8,7 +8,7 @@ class Array {
 	friend ostream &operator<<(ostream &, const Array &);
 	friend istream &operator>>(istream &, Array &);
 public:
-	Array(int = 10);
+	explicit Array(int = 10); // default constructor, not a conversion constructor
 	Array(const Array &);
 	~Array();
 
