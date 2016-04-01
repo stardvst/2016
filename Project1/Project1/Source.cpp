@@ -1,74 +1,32 @@
 #include <iostream>
-#include "String.h"
+#include "Date.h"
 using namespace std;
 
 
 int main() {
 
-	String s1("happy");
-	String s2(" birthday");
-	String s3;
+	Date d1(27, 12, 1992);
+	Date d2(99, 0, 8045);
+	Date d3;
 
-	// test overloaded equality and relational operators
-	 cout << "s1 is \"" << s1 << "\"; s2 is \"" << s2 
-		 << "\"; s3 is \"" << '\"'
-		 << boolalpha << "\n\nThe results of comparing s2 and s1:"
-		 << "\ns2 == s1 yields " << (s2 == s1)
-		 << "\ns2 != s1 yields " << (s2 != s1)
-		 << "\ns2 > s1 yields " << (s2 > s1)
-		 << "\ns2 < s1 yields " << (s2 < s1)
-		 << "\ns2 >= s1 yields " << (s2 >= s1)
-		 << "\ns2 <= s1 yields " << (s2 <= s1);
+	cout << "d1 is " << d1 << "\nd2 is " << d2 << "\nd3 is " << d3;
+	cout << "\n\nd2 += 7 is " << (d2 += 7);
 
-	// test overloaded String empty (!) operator
-	cout << "\n\nTesting !s3:" << endl;
-	if (!s3) {
-		cout << "s3 is empty; assigning s1 to s3;" << endl;
-		s3 = s1;
-		cout << "s3 is \"" << s3 << "\"";
-	}
+	d3.setDate(28, 2, 1992);
+	cout << "\nd3 is " << d3;
+	cout << "\n++d3 is " << ++d3 << " (leap year allows 29th)";
 
-	// test overloaded String concatenation operator
-	cout << "\n\ns1 += s2 yields s1 = ";
-	s1 += s2;
-	cout << s1;
+	Date d4(13, 7, 2002);
 
-	// test conversion constructor
-	cout << "\n\ns1 += \" to you\" yields" << endl;
-	s1 += " to you"; // test conversion constructor
-	cout << "s1 = " << s1 << "\n\n";
+	cout << "\n\nTesting the prefix increment operator:\n"
+		<< " d4 is " << d4 << endl;
+	cout << "++d4 is " << ++d4 << endl;
+	cout << " d4 is " << d4;
 
-	// test overloaded function call operator () for substring
-	cout << "The substring of s1 starting at\n"
-		 << "location 0 for 14 characters, s1(0, 14), is:\n"
-		 << s1(0, 14) << "\n\n";
-
-	// test substring "to-end-of-String" option
-	cout << "The substring of s1 starting at\n"
-		 << "location 15, s1(15), is: "
-		 << s1(15) << "\n\n";
-
-	// test copy constructor
-	String *s4Ptr = new String(s1);
-	cout << "\n*s4Ptr = " << *s4Ptr << "\n\n";
-
-	// test assignment (=) operator with self-assignment
-	cout << "assigning *s4Ptr to *s4Ptr" << endl;
-	*s4Ptr = *s4Ptr; // test overloaded assignment
-	cout << "*s4Ptr = " << *s4Ptr << endl;
-
-	// test destructor
-	delete s4Ptr;
-
-	// test using subscript operator to create a modifiable lvalue
-	s1[0] = 'H';
-	s1[6] = 'B';
-	cout << "\ns1 after s1[0] = 'H' and s1[6] = 'B' is: "
-		<< s1 << "\n\n";
-
-	// test subscript out of range
-	cout << "Attempt to assign 'd' to s1[30] yields:" << endl;
-	s1[30] = 'd'; // ERROR: subscript out of range
+	cout << "\n\nTesting the postfix increment operator:\n"
+		<< " d4 is " << d4 << endl;
+	cout << "d4++ is " << d4++ << endl;
+	cout << " d4 is " << d4 << endl;
 
 	system("pause");
 	return 0;

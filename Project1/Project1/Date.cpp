@@ -1,113 +1,86 @@
-#define _CRT_SECURE_NO_WARNINGS
-#define _CRT_NONSTDC_NO_DEPRECATE
 #include <iostream>
-#include <iomanip>
-#include <ctime>
+#include <string>
 #include "Date.h"
 using namespace std;
 
-static const int days[] =
-{ 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+const int Date::days[] =
+	{ 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
 /* user defined data */
 Date::Date(int d, int m, int y) {
-	// day error chaecking
-	if (d >= 1 && d <= days[m]) {
-		day = d;
-	}
-	if (m == 2 && d == 29 && (y % 400 == 0 || (y % 4 == 0 && y % 100 != 0))) { // leap year with 29.02.*
-		day = 29;
-	}
-	else if (m == 2 && d == 29 &&
-		!(y % 400 == 0 || (y % 4 == 0 && y % 100 != 0))) { // not leap year with 29.02.*
-		cout << y << " isn't a leap year.\n";
-		cout << "Date set to default.\n";
-		day = 1;
-		month = 1;
-		year = 2000;
-		return;
-	}
-	// month error checking
-	if (m >= 1 && m <= 12) {
-		month = m;
-	}
-	else {
-		month = 1;
-		cout << "Invalid month. Month set to 1.\n";
-	}
-	// year error checking
-	if (y >= 1900 && y <= 2100) {
-		year = y;
-	}
-	else {
-		cout << "Invalid year. Year set to 1900.\n";
+	setDate(d, m, y);
+}
+
+void Date::setDate(int dd, int mm, int yy) {
+	month = (mm >= 1 && mm <= 12) ? mm : 1;
+	year = (yy >= 1900 && yy <= 2100) ? yy : 1900;
+
+	// test for a leap year
+	if (month == 2 & isLeapYear(year)) {
+		day = (dd >= 1 && dd <= 29) ? dd : 1;
+	} else {
+		day = (dd >= 1 && dd <= days[month]) ? dd : 1;
 	}
 }
 
-Date::Date(int dayCount, int y) {
-	int month = 1;
-	if (y % 400 == 0 || (y % 4 == 0 && y % 100 != 0)) {
-		if (dayCount >= 1 && dayCount <= 366) {
-			day = 0;
-			do {
-				dayCount -= days[month];
-				month++;
-			} while (dayCount >= days[month]);
-		}
-		day = (month >= 3) ? --dayCount : dayCount;
+Date &Date::operator++() {
+	helpIncrement();
+	return *this;
+}
+
+Date Date::operator++(int) { // the dummy integer parameter does not have a parameter name
+	Date temp = *this;
+	helpIncrement();
+	return temp;
+}
+
+const Date &Date::operator+=(const int additionalDays) {
+	for (int i = 0; i < additionalDays; i++) {
+		helpIncrement();
+	}
+	return *this;
+}
+
+bool Date::isLeapYear(const int testYear) {
+	if (testYear % 400 == 0 ||
+		(testYear % 100 != 0 && testYear % 4 == 0)) {
+		return true;
 	}
 	else {
-		if (dayCount >= 1 && dayCount <= 365) {
-			day = 0;
-			do {
-				dayCount -= days[month];
-				month++;
-			} while (dayCount >= days[month]);
-		}
-		else if (dayCount == 366) {
-			cout << y << " isn't a leap year. Date defaulted.\n";
+		return false;
+	}
+}
+
+bool Date::endOfMonth(const int testDay) const {
+	if (month == 2 && isLeapYear(year)) {
+		return testDay == 29;
+	}
+	else {
+		return testDay == days[month];
+	}
+}
+
+void Date::helpIncrement() {
+	if (!endOfMonth(day)) {
+		day++;
+	}
+	else {
+		if (month < 12) { // day is end of month and month < 12
 			day = 1;
-			Date::month = 1;
-			year = 2000;
-			return;
+			month++;
 		}
-		day = dayCount;
+		else { // last day of year
+			day = 1;
+			month = 1;
+			year++;
+		}
 	}
-	Date::month = month;
-	year = y;
 }
 
-/* system defined data */
-Date::Date() {
-	time_t rawtime;
-	struct tm *info;
-	time(&rawtime);
-	info = localtime(&rawtime);
-	day = info->tm_mday; // not sure  
-	month = info->tm_mon + 1; // tm_mon is [0, 11]
-	year = info->tm_year + 1900; // tm_year is the years since 1900
-}
-
-void Date::formatDDDYYYY() const {
-	int dayCount = 0;
-	for (int i = 0; i < month; i++) {
-		dayCount += days[i];
-	}
-	if ((year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)) && month >= 3) {
-		dayCount++;
-	}
-	dayCount += day;
-	cout << "Date in DDD-YYYY format: " << setfill('0') << setw(3) <<
-		dayCount << "-" << year << '\n';
-}
-
-void Date::formatMMDDYY() const {
-	cout << "Date in MM/DD/YY format: " << setfill('0') << setw(2) << month << '/'
-		<< setw(2) << day << '/' << setw(2) << year % 100 << '\n';
-}
-
-void Date::displayInTextFormat() const {
-	const char *months[] =	{ "", "January", "February", "March", "April", "May",
-		"June", "July", "August", "September", "October", "November", "December" };
-	cout << "Date in text format: " << months[month] << " " << day << ", " << year << '\n';
+ostream &operator<<(ostream &output, const Date &d) {
+	static string monthName[13] = { "", "January", "February",
+		 "March", "April", "May", "June", "July", "August",
+		 "September", "October", "November", "December" };
+	output << monthName[d.month] << ' ' << d.day << ", " << d.year << endl;
+	return output;
 }
