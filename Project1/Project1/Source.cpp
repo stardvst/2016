@@ -1,21 +1,19 @@
 #include <iostream>
-#include "Array.h"
+#include "Interface.h"
 using namespace std;
 
-void outputArray(const Array &);
 
 int main() {
 
-	Array integers1(7);
-	outputArray(integers1);
-	// outputArray(3); // no suitable constructor exists to convert from "int" to "Array"
-	outputArray(Array(3));
+	Interface i(5);
+	cout << "i contains " << i.getValue()
+		<< " before setting a value.\n";
+	i.setValue(10);
+	cout << "i contains " << i.getValue()
+		<< " after setting a value.\n";
 
 	system("pause");
 	return 0;
 }
 
-void outputArray(const Array &arrayToOutput) {
-	cout << "The Array received has " << arrayToOutput.getSize()
-		<< " elements. The contents are:\n" << arrayToOutput << endl;
-}
+
