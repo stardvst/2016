@@ -1,6 +1,6 @@
 #include <iostream>
 #include "BasePlusCommissionEmployee.h"
-
+using std::cout;
 
 
 BasePlusCommissionEmployee::BasePlusCommissionEmployee(
@@ -8,6 +8,16 @@ BasePlusCommissionEmployee::BasePlusCommissionEmployee(
 	double sales, double rate, double salary)
 	: CommissionEmployee(first, last, ssn, sales, rate) {
 	setBaseSalary(salary);
+
+	cout << "BasePlusCommissionEmployee constructor:\n";
+	print();
+	cout << "\n\n";
+}
+ 
+BasePlusCommissionEmployee::~BasePlusCommissionEmployee() {
+	cout << "BasePlusCommissionEmployee destructor:\n";
+	print();
+	cout << "\n\n";
 }
 
 void BasePlusCommissionEmployee::setBaseSalary(double salary) {

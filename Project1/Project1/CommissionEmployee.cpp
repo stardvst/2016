@@ -1,6 +1,6 @@
 #include <iostream>
 #include "CommissionEmployee.h"
-
+using std::cout;
 
 
 CommissionEmployee::CommissionEmployee(const string &first,
@@ -9,6 +9,16 @@ CommissionEmployee::CommissionEmployee(const string &first,
 	: firstName(first), lastName(last), socialSecurityNumber(ssn) {
 	setGrossSales(sales);
 	setCommissionRate(rate);
+
+	cout << "CommissionEmployee constructor:\n";
+	print();
+	cout << "\n\n";
+}
+
+CommissionEmployee::~CommissionEmployee() {
+	cout << "CommissionEmployee destructor:\n";
+	print();
+	cout << "\n\n";
 }
 
 void CommissionEmployee::setFirstName(const string &first) {

@@ -8,6 +8,8 @@ class CommissionEmployee {
 public:
 	CommissionEmployee(const string &, const string &, const string &,
 		double = 0.0, double = 0.0);
+	~CommissionEmployee();
+
 	void setFirstName(const string &); // set first name
 	string getFirstName() const; // return first name
 	

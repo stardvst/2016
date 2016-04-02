@@ -1,32 +1,30 @@
 #include <iostream>
 #include <iomanip>
+#include <conio.h>
 #include "BasePlusCommissionEmployee.h"
 using namespace std;
 
 
 int main() {
 
-	BasePlusCommissionEmployee employee(
-		"Sue", "Jones", "222-22-2222", 5000, .04, 300);
-
 	cout << fixed << setprecision(2);
+	{
+		{
+			CommissionEmployee employee1(
+				"Bob", "Lewis", "333-33-3333", 5000, .04);
+		}
+		cout << endl;
+		BasePlusCommissionEmployee
+			employee2("Lisa", "Jones", "555-55-5555", 2000, .06, 800);
 
-	cout << "Employee information obtained by get functions: \n"
-		<< "\nFirst name is " << employee.getFirstName()
-		<< "\Last name is " << employee.getLastName()
-		<< "\nSocial security number is "
-		<< employee.getSocialSecurityNumber()
-		<< "\nGross sales is " << employee.getGrossSales()
-		<< "\nCommission rate is " << employee.getCommissionRate()
-		<< "\nBase salary is " << employee.getBaseSalary() << endl;
-
-	employee.setBaseSalary(1000); // set base salary
-
-	cout << "\nUpdated employee information output by print function: \n" << endl;
-	employee.print();
-
-	cout << "\n\nEmployee's earnings: $" << employee.earnings() << endl;
-
+		cout << endl;
+		BasePlusCommissionEmployee
+			employee3("Mark", "Sands", "888-88-8888", 8000, .15, 2000);
+	}
+	
+	
+	
+	
 	system("pause");
 	return 0;
 }
