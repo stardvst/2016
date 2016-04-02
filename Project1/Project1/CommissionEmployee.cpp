@@ -5,10 +5,8 @@
 
 CommissionEmployee::CommissionEmployee(const string &first,
 	const string &last, const string &ssn,
-	double sales, double rate) {
-	firstName = first;
-	lastName = last;
-	socialSecurityNumber = ssn;
+	double sales, double rate) 
+	: firstName(first), lastName(last), socialSecurityNumber(ssn) {
 	setGrossSales(sales);
 	setCommissionRate(rate);
 }
@@ -54,12 +52,12 @@ double CommissionEmployee::getCommissionRate() const {
 }
 
 double CommissionEmployee::earnings() const {
-	return commissionRate * grossSales;
+	return getCommissionRate() * getGrossSales();
 }
 
 void CommissionEmployee::print() const {
-	std::cout << "commission employee: " << firstName << ' ' << lastName
-		<< "\nsocial security number: " << socialSecurityNumber
-		<< "\ngross sales: " << grossSales
-		<< "\ncommission rate: " << commissionRate;
+	std::cout << "commission employee: " << getFirstName() << ' ' << getLastName()
+		<< "\nsocial security number: " << getSocialSecurityNumber()
+		<< "\ngross sales: " << getGrossSales()
+		<< "\ncommission rate: " << getCommissionRate();
 }

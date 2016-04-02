@@ -19,13 +19,11 @@ double BasePlusCommissionEmployee::getBaseSalary() const {
 }
 
 double BasePlusCommissionEmployee::earnings() const {
-	return baseSalary + (commissionRate * grossSales);
+	return baseSalary + CommissionEmployee::earnings();
 }
 
 void BasePlusCommissionEmployee::print() const {
-	std::cout << "base-salaried commission employee: " << firstName << ' '
-		<< lastName << "\nsocial security number: " << socialSecurityNumber
-		<< "\ngross sales: " << grossSales
-		<< "\ncommission rate: " << commissionRate
-		<< "\nbase salary: " << baseSalary;
+	std::cout << "base-salaried ";
+	CommissionEmployee::print();
+	std::cout << "\nbase salary: " << getBaseSalary();
 }

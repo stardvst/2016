@@ -25,7 +25,7 @@ public:
 	
 	double earnings() const; // calculate earnings
 	void print() const; // print CommissionEmployee object
-protected:
+private:
 	string firstName;
 	string lastName;
 	string socialSecurityNumber;
