@@ -1,32 +1,40 @@
 #include <iostream>
-#include <iomanip>
-#include <conio.h>
-#include "BasePlusCommissionEmployee.h"
+#include "Rational.h"
 using namespace std;
-
 
 int main() {
 
-	cout << fixed << setprecision(2);
-	{
-		{
-			CommissionEmployee employee1(
-				"Bob", "Lewis", "333-33-3333", 5000, .04);
-		}
-		cout << endl;
-		BasePlusCommissionEmployee
-			employee2("Lisa", "Jones", "555-55-5555", 2000, .06, 800);
+	Rational r1(2, 4);
+	cout << "Fraction 1:\n";
+	r1.printFloating();
+	r1.printRational();
 
-		cout << endl;
-		BasePlusCommissionEmployee
-			employee3("Mark", "Sands", "888-88-8888", 8000, .15, 2000);
-	}
-	
-	
-	
-	
+	Rational r2(10, 12);
+	cout << "\nFraction 2:\n";
+	r2.printFloating();
+	r2.printRational();
+
+	Rational r3 = r1 + r2;
+	cout << "\nAdded. Fraction 3:\n";;
+	r3.printFloating();
+	r3.printRational();
+
+	Rational r4 = r1 - r2;
+	cout << "\nSubtracted. Fraction 4:\n";
+	r4.printFloating();
+	r4.printRational();
+
+	Rational r5 = r1*r2;
+	cout << "\nMultiplied. Fraction 5:\n";
+	r5.printFloating();
+	r5.printRational();
+
+	Rational r6 = r1 / r2;
+	cout << "\nDivided. Fraction 6:\n";
+	r6.printFloating();
+	r6.printRational();
+
 	system("pause");
 	return 0;
 }
-
 

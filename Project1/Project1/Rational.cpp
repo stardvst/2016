@@ -39,22 +39,58 @@ Rational::Rational(int n, int d) {
 	denominator = d / gcd;
 }
 
-Rational Rational::add(const Rational &fraction) const {
+Rational Rational::operator+(const Rational &fraction) const {
 	return Rational(numerator*fraction.denominator + denominator*fraction.numerator,
 		denominator*fraction.denominator);
 }
 
-Rational Rational::subtract(const Rational &fraction) const {
+Rational Rational::operator-(const Rational &fraction) const {
 	return Rational(numerator*fraction.denominator - denominator*fraction.numerator,
 		denominator*fraction.denominator);
 }
 
-Rational Rational::multiply(const Rational &fraction) const {
+Rational Rational::operator*(const Rational &fraction) const {
 	return Rational(numerator * fraction.numerator, denominator * fraction.denominator);
 }
 
-Rational Rational::divide(const Rational &fraction) const {
+Rational Rational::operator/(const Rational &fraction) const {
 	return Rational(numerator * fraction.denominator, denominator * fraction.numerator);
+}
+
+bool Rational::operator==(const Rational &fraction) const {
+	if (fraction.numerator == numerator &&
+		fraction.denominator == denominator) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+bool Rational::operator!=(const Rational &fraction) const {
+	return !(fraction == *this);
+}
+
+bool Rational::operator<(const Rational &fraction) const {
+	if (numerator*fraction.denominator < denominator*fraction.numerator) {
+		return true;
+	}
+	else {
+		return false;
+	}
+
+}
+
+bool Rational::operator>(const Rational &fraction) const {
+	return fraction < *this;
+}
+
+bool Rational::operator<=(const Rational &fraction) const {
+	return !(fraction < *this);
+}
+
+bool Rational::operator>=(const Rational &fraction) const {
+	return !(*this < fraction);
 }
 
 void Rational::printRational() const {

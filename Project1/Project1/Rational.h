@@ -4,10 +4,22 @@
 class Rational {
 public:
 	Rational(int = 1, int = 1);
-	Rational add(const Rational &) const;
-	Rational subtract(const Rational &) const;
-	Rational multiply(const Rational &) const;
-	Rational divide(const Rational &) const;
+
+	/* addition, subtraction, multiplication, division */
+	Rational operator+(const Rational &) const;
+	Rational operator-(const Rational &) const;
+	Rational operator*(const Rational &) const;
+	Rational operator/(const Rational &) const;
+
+	/* relational and equality operators */
+	bool operator==(const Rational &) const;
+	bool operator!=(const Rational &) const;
+	bool operator<(const Rational &) const;
+	bool operator>(const Rational &) const;
+	bool operator<=(const Rational &) const;
+	bool operator>=(const Rational &) const;
+
+	/* print the fraction */
 	void printRational() const;
 	void printFloating() const; 
 private:
