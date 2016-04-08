@@ -1,17 +1,14 @@
 #ifndef SAVINGSACCOUNT_H
 #define SAVINGSACCOUNT_H
 
-class SavingsAccount {
+#include "Account.h"
+
+class SavingsAccount :public Account {
 public:
-	SavingsAccount(int);
-	~SavingsAccount() {};
-
-	double getSavingsBalance() const;
-
-	void calculateMonthlyInterest();
-	static void modifyInterestRate(double);
+	SavingsAccount(double, double);
+	double calculateInterest() const;
 private:
-	double savingsBalance;
+	double interestRate;
 };
 
 #endif // !SAVINGSACCOUNT_H

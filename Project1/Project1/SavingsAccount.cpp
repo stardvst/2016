@@ -1,20 +1,13 @@
 #include "SavingsAccount.h"
 
-static double annualInterestRate;
 
-SavingsAccount::SavingsAccount(int balance) {
-	savingsBalance = balance;
+SavingsAccount::SavingsAccount(double initial, double rate)
+	:Account(initial) {
+	interestRate = rate;
 }
 
-double SavingsAccount::getSavingsBalance() const {
-	return savingsBalance;
+double SavingsAccount::calculateInterest() const {
+	return interestRate * Account::getBalance();
 }
 
-void SavingsAccount::calculateMonthlyInterest() {
-	savingsBalance += (savingsBalance * (annualInterestRate / 12));
-}
-
-void SavingsAccount::modifyInterestRate(double newInterestRate) {
-	annualInterestRate = newInterestRate;
-}
 

@@ -1,35 +1,30 @@
 #include <iostream>
-#include "TwoDayPackage.h"
-#include "OvernightPackage.h"
+#include "SavingsAccount.h"
+#include "CheckingAccount.h"
 using namespace std;
 
 
 
 int main() {
 
-	Package package1(
-		"Cion", "Ziou 15024", "Shanghai", "West", "0005",		// sender info
-		2.36, 1.5,												// package info
-		"Lilia", "Manta 10/1", "Yerevan", "Shengavit", "0006");	// recipient info
+	SavingsAccount account(1500, 0.1);
+	cout << "Loading account...\nInitial balance: " << account.getBalance() << endl;
+	double interest = account.calculateInterest();
+	cout << "Interest: " << interest << endl;
+	account.credit(interest);
+	cout << "Adding interest to balance..." << endl;
+	cout << "Balance: " << account.getBalance() << endl << endl;
 
-	TwoDayPackage package2(
-		"Cion", "Ziou 15024", "Shanghai", "West", "0005",		// sender info
- 		2.36, 1.5,												// package info
-		"Lilia", "Manta 10/1", "Yerevan", "Shengavit", "0006",	// recipient info
-		0.35);													// fee
-
-	OvernightPackage package3(
-		"Cion", "Ziou 15024", "Shanghai", "West", "0005",		// sender info
-		2.36, 1.5,												// package info
-		"Lilia", "Manta 10/1", "Yerevan", "Shengavit", "0006",	// recipient info
-		1.2);													// fee per ounce
-		
-	cout << "Ordinary package:" << endl;
-	package1.printfPackageInfo();
-	cout << endl << "Two Day Package:" << endl;
-	package2.printfPackageInfo();
-	cout << endl << "Overnight Package:" << endl;
-	package3.printfPackageInfo();
+	CheckingAccount check(1000, 100);
+	cout << "Checking account...\nInitial balance: " << check.getBalance() << endl;
+	cout << "Adding amount to balance..." << endl;
+	check.credit(150);
+	cout << "Balance: " << check.getBalance() << endl;
+	cout << "Deducting invalid amount from balance..." << endl;
+	check.debit(2500);
+	cout << "Deducting valid amount (+fee) from balance..." << endl;
+	check.debit(500);
+	cout << "Balance: " << check.getBalance() << endl;
 
 	system("pause");
 	return 0;
