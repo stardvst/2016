@@ -1,38 +1,24 @@
 #ifndef COMMISSION_H
 #define COMMISSION_H
 
-#include <string>
-using std::string;
+#include "Employee.h"
 
-class CommissionEmployee {
+class CommissionEmployee :public Employee {
 public:
 	CommissionEmployee(const string &, const string &, const string &,
 		double = 0.0, double = 0.0);
-	~CommissionEmployee();
+	
+	void setGrossSales(double); 
+	double getGrossSales() const; 
+	
+	void setCommissionRate(double);
+	double getCommissionRate() const;
 
-	void setFirstName(const string &); // set first name
-	string getFirstName() const; // return first name
-	
-	void setLastName(const string &); // set last name
-	string getLastName() const; // return last name
-	
-	void setSocialSecurityNumber(const string &); // set SSN
-	string getSocialSecurityNumber() const; // return SSN
-	
-	void setGrossSales(double); // set gross sales amount
-	double getGrossSales() const; // return gross sales amount
-	
-	void setCommissionRate(double); // set commission rate (percentage)
-	double getCommissionRate() const; // return commission rate
-	
-	double earnings() const; // calculate earnings
-	void print() const; // print CommissionEmployee object
+	virtual double earnings() const;
+	virtual void print() const; 
 private:
-	string firstName;
-	string lastName;
-	string socialSecurityNumber;
-	double grossSales; // gross weekly sales
-	double commissionRate; // commission percentage
+	double grossSales; 
+	double commissionRate; 
 };
 
 #endif // !COMMISSION_H

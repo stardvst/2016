@@ -1,91 +1,72 @@
-#include <stdio.h>
-#include <socketapi.h>
-#include <WinSock2.h>
-#include <stdlib.h>
-#include <string.h>
-#include <io.h>
+#include <iostream>
+#include <iomanip>
+#include <vector>
+#include "Employee.h"
+#include "SalariedEmployee.h"
+#include "HourlyEmployee.h"
+#include "CommissionEmployee.h"
+#include "BasePlusCommissionEmployee.h"
+using namespace std;
 
-#define RCVBUFSIZE 32
+void virtualViaPointer(const Employee *const);
+void virtualViaReference(const Employee &);
 
-void DieWithError(char *errorMessage) {
-	perror(errorMessage);
-	exit(1);
-}
+int main() {
 
-int main(int argc, char *argv[]) {
+	cout << fixed << setprecision(2);
 
-	int sock;
-	struct sockaddr_in echoServerAddress;
-	unsigned short echoServerPort;
-	char *serverIP;
-	char *echoString;
-	char echoBuffer[RCVBUFSIZE];
-	unsigned int echoStringLength;
-	int bytesRcvd, totalBytesRcvd;
+	SalariedEmployee salariedEmployee(
+		"John", "Smith", "111-11-1111", 800);
+	HourlyEmployee hourlyEmployee(
+		"Karen", "Price", "222-22-2222", 16.75, 40);
+	CommissionEmployee commissionEmployee(
+		"Sue", "Jones", "333-33-3333", 10000, .06);
+	BasePlusCommissionEmployee basePlusCommissionEmployee(
+		"Bob", "Lewis", "444-44-4444", 5000, .04, 300);
+	
+	cout << "Employees processed individually using static binding:\n\n";
 
-	if ((argc < 3 || argc>4)) {
-		fprintf(stderr, "Usage: %s <Server IP> <Echo Word> [<Echo Port>]\n", argv[0]);
-		exit(1);
+	salariedEmployee.print();
+	cout << "\nearned $" << salariedEmployee.earnings() << "\n\n";
+	hourlyEmployee.print();
+	cout << "\nearned $" << hourlyEmployee.earnings() << "\n\n";
+	commissionEmployee.print();
+	cout << "\nearned $" << commissionEmployee.earnings() << "\n\n";
+	basePlusCommissionEmployee.print();
+	cout << "\nearned $" << basePlusCommissionEmployee.earnings() << "\n\n";
+
+	
+	vector <Employee*> employees(4);
+	employees[0] = &salariedEmployee;
+	employees[1] = &hourlyEmployee;
+	employees[2] = &commissionEmployee;
+	employees[3] = &basePlusCommissionEmployee;
+
+	// call virtualViaPointer to print each Employee's information
+	// and earnings using dynamic binding
+	cout << "Employees processed polymorphically via dynamic binding:\n\n";
+	for (size_t i = 0; i < employees.size(); i++) {
+		virtualViaPointer(employees[i]);
 	}
 
-	serverIP = argv[1];
-	echoString = argv[2];
-
-	if (argc == 4) {
-		echoServerPort = atoi(argv[3]); /* Use given port, if any */
-	}
-	else {
-		echoServerPort = 7; /* 7 is the well-known port for the echo service */
-	}
-
-	/* Create a reliable, stream socket using TCP */
-	sock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
-	if (sock < 0) {
-		DieWithError("socket() failed");
-	}
-
-	/* Construct the server address structure */
-	memset(&echoServerAddress, 0, sizeof(echoServerAddress));
-	//  void *memset(void *str, int c, size_t n) copies the
-	// character c (an unsigned char) to the first n characters
-	// of the string pointed to, by the argument str.
-	echoServerAddress.sin_family = AF_INET;
-	echoServerAddress.sin_addr.s_addr = inet_addr(serverIP);
-	echoServerAddress.sin_port = htons(echoServerPort);
-
-	/* Establish the connection to the echo server */
-	if (connect(sock, (struct sockaddr *)&echoServerAddress, sizeof(echoServerAddress)) < 0) {
-		DieWithError("connect() failed");
-	}
-
-	echoStringLength = strlen(echoString);
-	/* Send the string to the server */
-	if (send(sock, echoString, echoStringLength, 0) != echoStringLength) {
-		DieWithError("send() sent a different number of bytes than"
-			"expected");
-	}
-
-	/* Receive the same string back from the server */
-	totalBytesRcvd = 0;
-	printf("Received: "); /* Setup to print the echoed string */
-	while (totalBytesRcvd < echoStringLength) {
-		/* Receive up to the buffer size (minus 1 to leave space for
-		a null terminator) bytes from the sender */
-		if ((bytesRcvd = recv(sock, echoBuffer, RCVBUFSIZE - 1, 0)) <= 0) {
-			DieWithError("recv() failed or connection closed"
-				"prematurely");
-		}
-		totalBytesRcvd += bytesRcvd;
-		echoBuffer[bytesRcvd] = '\0';
-		printf(echoBuffer);
-	}
-
-	printf("\n");
-
-	close(sock);
+	// call virtualViaReference to print each Employee's information
+	// and earnings using dynamic binding
+	cout << "Virtual function calls made off base-class references:\n\n";
+	for (size_t i = 0; i < employees.size(); i++) {
+		virtualViaReference(*employees[i]); // note dereferencing
+	} 
 
 	system("pause");
 	return 0;
 }
 
 
+void virtualViaPointer(const Employee *const baseClassPointer) {
+	baseClassPointer->print();
+	cout << "\nearned: $" << baseClassPointer->earnings() << "\n\n";
+}
+
+void virtualViaReference(const Employee &baseClassReference) {
+	baseClassReference.print();
+	cout << "\nearned: $" << baseClassReference.earnings() << "\n\n";
+}

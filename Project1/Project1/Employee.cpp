@@ -2,30 +2,40 @@
 #include "Employee.h"
 using namespace std;
 
-// define and initialize static data member at global namespace scope
-int Employee::count = 0; // cannot include keyword static
 
-int Employee::getCount() {
-	return count;
+
+Employee::Employee(const string &first, const string &last, 
+	const string &ssn)
+	:firstName(first), lastName(last), socialSecurityNumber(ssn) {
+	// empty body
 }
 
-Employee::Employee(const string &first, const string &last)
-	:firstName(first), lastName(last) {
-	++count;
-	cout << "Employee constructor for " << firstName
-		<< ' ' << lastName << " called." << endl;
-}
 
-Employee::~Employee() {
-	cout << "~Employee() called for " << firstName
-		<< ' ' << lastName << endl;
-	count--;
+void Employee::setFirstName(const string &first) {
+	firstName = first;
 }
 
 string Employee::getFirstName() const {
 	return firstName;
 }
 
-string Employee::getlastName() const {
+void Employee::setLastName(const string &last) {
+	lastName = last;
+}
+
+string Employee::getLastName() const {
 	return lastName;
+}
+
+void Employee::setSocialSecurityNumber(const string &ssn) {
+	socialSecurityNumber = ssn;
+}
+
+string Employee::getSocialSecurityNumber() const {
+	return socialSecurityNumber;
+}
+
+void Employee::print() const {
+	cout << getFirstName() << ' ' << getLastName()
+		<< "\nsocial security number: " << getSocialSecurityNumber();
 }
