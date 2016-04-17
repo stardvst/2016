@@ -1,139 +1,63 @@
-#include <iostream>
+#include <cctype> // isdigit
 #include "HugeInteger.h"
 
-void HugeInteger::input() {
-	std::cout << "Input the digits:\n";
-	for (int i = 0; i < 40; i++) {
-		std::cout << "Digit " << i + 1 << ": ";
-		std::cin >> digits[i];
+
+HugeInteger::HugeInteger(long value) {
+	for (int i = 0; i < digits; i++) {
+		integer[i] = 0; // init to 0
 	}
-	std::cout << "\n\n";
+	for (int j = digits - 1; value != 0 && j >= 0; j--) {
+		integer[j] = value % 10;
+		value /= 10;
+	}
 }
 
-void HugeInteger::output() const {
-	std::cout << "Output:\n";
-	for (int i = 0; i < 40; i++) {
-		std::cout << "Digit " << i + 1 << ": " << digits[i] << "   ";
-		if ((i + 1) % 4 == 0) {
-			std::cout << "\n";
+HugeInteger::HugeInteger(const string &number) {
+	for (int i = 0; i < digits; i++) {
+		integer[i] = 0; // init to 0
+	}
+
+	int length = number.size();
+	for (int j = digits - length, k = 0; j < digits; j++, k++) {
+		if (isdigit(number[k])) {
+			integer[j] = number[k] - '0';
 		}
 	}
-	std::cout << "\n\n";
 }
 
-HugeInteger HugeInteger::add(const HugeInteger &other) const {
+HugeInteger HugeInteger::operator+(const HugeInteger &operand2) const {
 	HugeInteger temp;
-	for (int i = 0; i < 40; i++) {
-		temp.digits[i] = digits[i] + other.digits[i];
-	}
-	return temp;
-}
-
-HugeInteger HugeInteger::subtract(const HugeInteger &other) const {
-	HugeInteger temp;
-	for (int i = 0; i < 40; i++) {
-		temp.digits[i] = digits[i] - other.digits[i];
-	}
-	return temp;
-}
-
-HugeInteger HugeInteger::multiply(const HugeInteger &other) const {
-	HugeInteger temp;
-	for (int i = 0; i < 40; i++) {
-		temp.digits[i] = digits[i] * other.digits[i];
-	}
-	return temp;
-}
-
-HugeInteger HugeInteger::divide(const HugeInteger &other) const {
-	HugeInteger temp;
-	for (int i = 0; i < 40; i++) {
-		if (other.digits[i] == 0) {
-			std::cout << "Digit " << i << ": " << "Denominator can't be 0. Value set to -1.\n";
-			temp.digits[i] = -1;
-			continue;
+	int carry = 0;
+	for (int i = digits - 1; i >= 0; i--) {
+		temp.integer[i] = integer[i] + operand2.integer[i] + carry;
+		if (temp.integer[i] > 9) {
+			temp.integer[i] %= 10;
+			carry = 1;
 		}
 		else {
-			temp.digits[i] = (double)digits[i] / other.digits[i];
+			carry = 0;
 		}
 	}
 	return temp;
 }
 
-HugeInteger HugeInteger::modulus(const HugeInteger &other) const {
-	HugeInteger temp;
-	for (int i = 0; i < 40; i++) {
-		if (other.digits[i] == 0) {
-			std::cout << "Digit " << i << ": " << "Can't mod 0. Value set to -1.\n";
-			temp.digits[i] = -1;
-			continue;
-		}
-		else {
-			temp.digits[i] = digits[i] % other.digits[i];
-		}
-	}
-	return temp;
+HugeInteger HugeInteger::operator+(int operand2) const {
+	return *this + HugeInteger(operand2);
 }
 
-bool HugeInteger::isEqualTo(const HugeInteger &other) const {
-	for (int i = 0; i < 40; i++) {
-		if (digits[i] != other.digits[i]) {
-			return false;
-		}
-	}
-	return true;
+HugeInteger HugeInteger::operator+(const string &operand2) const {
+	return *this + HugeInteger(operand2);
 }
 
-bool HugeInteger::isNotEqualTo(const HugeInteger &other) const {
-	for (int i = 0; i < 40; i++) {
-		if (digits[i] == other.digits[i]) {
-			return false;
-		}
+ostream &operator<<(ostream &output, const HugeInteger &number) {
+	int i;
+	for (i = 0; (number.integer[i] == 0) && (i <= HugeInteger::digits); i++)
+		;
+	if (i == HugeInteger::digits) {
+		output << 0;
 	}
-	return true;
-}
-
-bool HugeInteger::isGreaterThan(const HugeInteger &other) const {
-	for (int i = 0; i < 40; i++) {
-		if (digits[i] <= other.digits[i]) {
-			return false;
-		}
+	for (; i < HugeInteger::digits; i++) {
+		output << number.integer[i];
 	}
-	return true;
-}
-
-bool HugeInteger::isLessThan(const HugeInteger &other) const {
-	for (int i = 0; i < 40; i++) {
-		if (digits[i] >= other.digits[i]) {
-			return false;
-		}
-	}
-	return true;
-}
-
-bool HugeInteger::isGreaterThanOrEqualTo(const HugeInteger &other) const {
-	for (int i = 0; i < 40; i++) {
-		if (digits[i] < other.digits[i]) {
-			return false;
-		}
-	}
-	return true;
-}
-
-bool HugeInteger::isLessThanOrEqualTo(const HugeInteger &other) const {
-	for (int i = 0; i < 40; i++) {
-		if (digits[i] > other.digits[i]) {
-			return false;
-		}
-	}
-	return true;
-}
-
-bool HugeInteger::isZero() const {
-	for (int i = 0; i < 40; i++) {
-		if (digits[i] != 0) {
-			return false;
-		}
-	}
-	return true;
+	return output;
 }

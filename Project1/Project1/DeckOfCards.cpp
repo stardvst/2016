@@ -4,6 +4,7 @@
 
 
 DeckOfCards::DeckOfCards() {
+	srand(time(NULL));
 	currentCard = 0;
 	for (int suit = 0; suit < 4; suit++) {
 		for (int face = 0; face < 13; face++) {
@@ -14,7 +15,6 @@ DeckOfCards::DeckOfCards() {
 }
 
 void DeckOfCards::shuffle() {
-	srand(time(NULL));
 	for (int i = 0; i < 52; i++) {
 		int j = rand() % 52;
 		Card temp = deck[i];
@@ -25,6 +25,32 @@ void DeckOfCards::shuffle() {
 
 Card DeckOfCards::dealCard() {
 	return deck[currentCard++];
+}
+
+void DeckOfCards::dealFiveCardHand() {
+	for (int card = 0; card < 5; card++) {
+		hand.push_back(deck[rand() % 52]);
+		std::cout << "Card " << card + 1 << " is " << hand[card].toString() << std::endl;
+	}
+}
+
+bool DeckOfCards::containsAPair() const {
+	int faceFrequency[13] = { 0 };
+	bool onePair = false;
+	for (int i = 0; i < 5; i++) {
+		faceFrequency[hand[i].getFace()]++;
+	}
+	for (int i = 0; i < 13; i++) {
+		if (faceFrequency[i] == 2) {
+			for (int j = i; j < 13; j++) {
+				if (faceFrequency[j] == 2) {
+					return false;
+				}
+			}
+			return true; 
+		}
+	}
+	return false;
 }
 
 bool DeckOfCards::moreCards() const {

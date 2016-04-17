@@ -7,6 +7,8 @@ class Card {
 public:
 	Card(int, int);
 	std::string toString() const;
+	int getFace() const;
+	int getSuit() const;
 private:
 	int face;
 	int suit;

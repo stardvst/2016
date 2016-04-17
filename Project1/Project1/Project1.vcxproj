@@ -76,6 +76,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -83,6 +86,9 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -111,11 +117,36 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Rational.cpp" />
+    <ClCompile Include="Account.cpp" />
+    <ClCompile Include="BasePlusCommissionEmployee.cpp" />
+    <ClCompile Include="Card.cpp" />
+    <ClCompile Include="CheckingAccount.cpp" />
+    <ClCompile Include="CommissionEmployee.cpp" />
+    <ClCompile Include="DeckOfCards.cpp" />
+    <ClCompile Include="Employee.cpp" />
+    <ClCompile Include="HourlyEmployee.cpp" />
+    <ClCompile Include="HugeInteger.cpp" />
+    <ClCompile Include="IntegerSet.cpp" />
+    <ClCompile Include="SalariedEmployee.cpp" />
+    <ClCompile Include="SavingsAccount.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Rational.h" />
+    <ClInclude Include="Account.h" />
+    <ClInclude Include="BasePlusCommissionEmployee.h" />
+    <ClInclude Include="Card.h" />
+    <ClInclude Include="CheckingAccount.h" />
+    <ClInclude Include="CommissionEmployee.h" />
+    <ClInclude Include="DeckOfCards.h" />
+    <ClInclude Include="Employee.h" />
+    <ClInclude Include="HourlyEmployee.h" />
+    <ClInclude Include="HugeInteger.h" />
+    <ClInclude Include="IntegerSet.h" />
+    <ClInclude Include="SalariedEmployee.h" />
+    <ClInclude Include="SavingsAccount.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

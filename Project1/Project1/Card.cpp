@@ -12,3 +12,11 @@ Card::Card(int f, int s) {
 std::string Card::toString() const {
 	return faces[face] + " of " + suits[suit];
 }
+
+int Card::getFace() const {
+	return face;
+}
+
+int Card::getSuit() const {
+	return suit;
+}

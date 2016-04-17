@@ -1,27 +1,42 @@
 #ifndef HUGEINTEGER_H
 #define HUGEINTEGER_H
 
+#include <iostream>
+#include <string>
+using std::string;
+using std::ostream;
+
 class HugeInteger {
+	friend ostream &operator<<(ostream &, const HugeInteger &);
 public:
-	void input();
-	void output() const;
 
-	HugeInteger add(const HugeInteger &) const;
-	HugeInteger subtract(const HugeInteger &) const;
-	HugeInteger multiply(const HugeInteger &) const;
-	HugeInteger divide(const HugeInteger &) const;
-	HugeInteger modulus(const HugeInteger &) const;
+	static const int digits = 30; // max digits in a HugeInteger
 
-	bool isEqualTo(const HugeInteger &) const;
-	bool isNotEqualTo(const HugeInteger &) const;
-	bool isGreaterThan(const HugeInteger &) const;
-	bool isLessThan(const HugeInteger &) const;
-	bool isGreaterThanOrEqualTo(const HugeInteger &) const;
-	bool isLessThanOrEqualTo(const HugeInteger &) const;
-	bool isZero() const;
+	HugeInteger(long = 0); // conversion/default ctor
+	HugeInteger(const string &); // conversion ctor
+
+	HugeInteger operator+(const HugeInteger &) const; // HugeInteger + HugeInteger
+	HugeInteger operator+(int) const; // HugeInteger + int
+	HugeInteger operator+(const string &) const; // HugeInteger + string
+
+	HugeInteger operator*(const HugeInteger &) const; // HugeInteger * HugeInteger
+	HugeInteger operator*(int) const; // HugeInteger * int
+	HugeInteger operator*(const string &) const; // HugeInteger * string
+
+	HugeInteger operator/(const HugeInteger &) const; // HugeInteger / HugeInteger
+	HugeInteger operator/(int) const; // HugeInteger / int
+	HugeInteger operator/(const string &) const; // HugeInteger / string
+
+	HugeInteger operator==(const HugeInteger &) const; // HugeInteger == HugeInteger
+	HugeInteger operator==(int) const; // HugeInteger == int
+	HugeInteger operator==(const string &) const; // HugeInteger == string
+
+	HugeInteger operator!=(const HugeInteger &) const; // HugeInteger != HugeInteger
+	HugeInteger operator!=(int) const; // HugeInteger != int
+	HugeInteger operator!=(const string &) const; // HugeInteger != string
 
 private:
-	int digits[40];
+	short integer[digits];
 };
 
 #endif // !HUGEINTEGER_H

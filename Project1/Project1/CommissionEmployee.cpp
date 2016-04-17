@@ -11,9 +11,6 @@ CommissionEmployee::CommissionEmployee(const string &first,
 	setGrossSales(sales);
 	setCommissionRate(rate);
 
-	cout << "CommissionEmployee constructor:\n";
-	print();
-	cout << "\n\n";
 }
 
 
