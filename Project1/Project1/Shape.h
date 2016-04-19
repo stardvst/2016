@@ -5,6 +5,11 @@ class Shape {
 public:
 	Shape() {};
 	virtual ~Shape() {};
+
+	char setFillCharacter() const;
+	char setBorderCharacter() const;
+
+	virtual void draw() const = 0;
 	virtual void print() const = 0;
 };
 

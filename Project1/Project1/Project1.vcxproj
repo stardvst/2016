@@ -124,12 +124,16 @@
     <ClCompile Include="DeckOfCards.cpp" />
     <ClCompile Include="HugeInteger.cpp" />
     <ClCompile Include="IntegerSet.cpp" />
-    <ClCompile Include="Pyramid.cpp" />
+    <ClCompile Include="OvernightPackage.cpp" />
+    <ClCompile Include="Package.cpp" />
+    <ClCompile Include="Point.cpp" />
+    <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="SavingsAccount.cpp" />
     <ClCompile Include="Shape.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Square.cpp" />
     <ClCompile Include="ThreeDimensionalShape.cpp" />
-    <ClCompile Include="TwoDimensionalShape.cpp" />
+    <ClCompile Include="TwoDayPackage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h" />
@@ -139,11 +143,15 @@
     <ClInclude Include="DeckOfCards.h" />
     <ClInclude Include="HugeInteger.h" />
     <ClInclude Include="IntegerSet.h" />
-    <ClInclude Include="Pyramid.h" />
+    <ClInclude Include="OvernightPackage.h" />
+    <ClInclude Include="Package.h" />
+    <ClInclude Include="Point.h" />
+    <ClInclude Include="Rectangle.h" />
     <ClInclude Include="SavingsAccount.h" />
     <ClInclude Include="Shape.h" />
+    <ClInclude Include="Square.h" />
     <ClInclude Include="ThreeDimensionalShape.h" />
-    <ClInclude Include="TwoDimensionalShape.h" />
+    <ClInclude Include="TwoDayPackage.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
