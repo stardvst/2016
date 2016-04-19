@@ -118,32 +118,32 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Account.cpp" />
-    <ClCompile Include="BasePlusCommissionEmployee.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CheckingAccount.cpp" />
-    <ClCompile Include="CommissionEmployee.cpp" />
+    <ClCompile Include="Circle.cpp" />
     <ClCompile Include="DeckOfCards.cpp" />
-    <ClCompile Include="Employee.cpp" />
-    <ClCompile Include="HourlyEmployee.cpp" />
     <ClCompile Include="HugeInteger.cpp" />
     <ClCompile Include="IntegerSet.cpp" />
-    <ClCompile Include="SalariedEmployee.cpp" />
+    <ClCompile Include="Pyramid.cpp" />
     <ClCompile Include="SavingsAccount.cpp" />
+    <ClCompile Include="Shape.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="ThreeDimensionalShape.cpp" />
+    <ClCompile Include="TwoDimensionalShape.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h" />
-    <ClInclude Include="BasePlusCommissionEmployee.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="CheckingAccount.h" />
-    <ClInclude Include="CommissionEmployee.h" />
+    <ClInclude Include="Circle.h" />
     <ClInclude Include="DeckOfCards.h" />
-    <ClInclude Include="Employee.h" />
-    <ClInclude Include="HourlyEmployee.h" />
     <ClInclude Include="HugeInteger.h" />
     <ClInclude Include="IntegerSet.h" />
-    <ClInclude Include="SalariedEmployee.h" />
+    <ClInclude Include="Pyramid.h" />
     <ClInclude Include="SavingsAccount.h" />
+    <ClInclude Include="Shape.h" />
+    <ClInclude Include="ThreeDimensionalShape.h" />
+    <ClInclude Include="TwoDimensionalShape.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
