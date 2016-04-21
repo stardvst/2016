@@ -1,51 +1,47 @@
 #include <iostream>
 using namespace std;
 
-template <typename T>
-void selectionSort(T *array, const int count) {
-	for (int i = 0; i < count; i++) {
-		for (int j = 0; j < count - 1; j++) {
-			if (array[j] > array[j + 1]) {
-				T temp = array[j];
-				array[j] = array[j + 1];
-				array[j + 1] = temp;
-			}
+template< typename T >
+int printArray(const T * const array, int count, int lowSubscript, int highSubscript) {
+	if (lowSubscript >= 1 && highSubscript <= count && lowSubscript <= highSubscript) {
+		int numberOfElements = 0;
+		for (int i = lowSubscript; i < highSubscript; i++) {
+			cout << array[i] << " ";
+			numberOfElements++;
 		}
+		cout << endl;
+		return numberOfElements;
 	}
+	return 0;
 }
 
 int main() {
 
-	int intArray[5];
-	double doubleArray[5];
+	const int aCount = 5; // size of array a
+	const int bCount = 7;
+	const int cCount = 6;
 
-	// int array
-	for (int i = 0; i < 5; i++) {
-		cout << "Enter intArray[" << i << "]: ";
-		cin >> intArray[i];
+	int a[aCount] = { 1,2,3,4,5 };
+	double b[bCount] = { 1.1,2.2,3.3,4.4,5.5,6.6,7.7 };
+	char c[cCount] = "HELLO";
+
+	cout << "Array a contains" << endl;
+	if (printArray(a, aCount, 2, 4) == 0) {
+		cout << "Subscripts are not correct!\n";
 	}
-	
-	selectionSort(intArray, 5);
+	cout << endl;
 
-	cout << "\nintArray sorted:\n";
-	for (int i = 0; i < 5; i++) {
-		cout << "Enter intArray[" << i << "]: " << intArray[i] << endl;
+	cout << "Array b contains" << endl;
+	if (printArray(b, bCount, -5, 4) == 0) {
+		cout << "Subscripts are not correct!\n";
 	}
-	cout << "\n\n";
+	cout << endl;
 
-	// double array
-	for (int i = 0; i < 5; i++) {
-		cout << "Enter doubleArray[" << i << "]: ";
-		cin >> doubleArray[i];
+	cout << "Array c contains" << endl;
+	if (printArray(c, cCount, 5, 4) == 0) {
+		cout << "Subscripts are not correct!\n";
 	}
-
-	selectionSort(doubleArray, 5);
-
-	cout << "\n\ndoubleArray sorted:\n";
-	for (int i = 0; i < 5; i++) {
-		cout << "Enter doubleArray[" << i << "]: " << doubleArray[i] << endl;
-	}
-
+	cout << endl;
 
 	system("pause");
 	return 0;
