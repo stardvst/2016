@@ -1,33 +1,52 @@
 #include <iostream>
-#include <string>
-#include "Stack.h"
 using namespace std;
 
 template <typename T>
-void testStack(Stack<T> &theStack, T value, T increment, const string stackName) {
-	cout << "\nPushing elements onto " << stackName << '\n';
-
-	while (theStack.push(value)) {
-		cout << value << ' ';
-		value += increment;
+void selectionSort(T *array, const int count) {
+	for (int i = 0; i < count; i++) {
+		for (int j = 0; j < count - 1; j++) {
+			if (array[j] > array[j + 1]) {
+				T temp = array[j];
+				array[j] = array[j + 1];
+				array[j + 1] = temp;
+			}
+		}
 	}
-	cout << "\nStack is full. Cannot push " << value
-		<< "\n\nPopping elements from " << stackName << '\n';
-
-	while (theStack.pop(value)) {
-		cout << value << ' ';
-	}
-	cout << "\nStack is empty. Cannot pop" << endl;
 }
 
 int main() {
 
-	Stack <double> doubleStack(5);
-	Stack <int> intStack; // default size 10
+	int intArray[5];
+	double doubleArray[5];
 
-	testStack(doubleStack, 1.1, 1.1, "double stack");
-	testStack(intStack, 1, 1, "int stack");
+	// int array
+	for (int i = 0; i < 5; i++) {
+		cout << "Enter intArray[" << i << "]: ";
+		cin >> intArray[i];
+	}
 	
-	cin.get();
+	selectionSort(intArray, 5);
+
+	cout << "\nintArray sorted:\n";
+	for (int i = 0; i < 5; i++) {
+		cout << "Enter intArray[" << i << "]: " << intArray[i] << endl;
+	}
+	cout << "\n\n";
+
+	// double array
+	for (int i = 0; i < 5; i++) {
+		cout << "Enter doubleArray[" << i << "]: ";
+		cin >> doubleArray[i];
+	}
+
+	selectionSort(doubleArray, 5);
+
+	cout << "\n\ndoubleArray sorted:\n";
+	for (int i = 0; i < 5; i++) {
+		cout << "Enter doubleArray[" << i << "]: " << doubleArray[i] << endl;
+	}
+
+
+	system("pause");
 	return 0;
 }
