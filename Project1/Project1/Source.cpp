@@ -1,44 +1,33 @@
 #include <iostream>
+#include <string>
 #include "Stack.h"
 using namespace std;
 
+template <typename T>
+void testStack(Stack<T> &theStack, T value, T increment, const string stackName) {
+	cout << "\nPushing elements onto " << stackName << '\n';
 
+	while (theStack.push(value)) {
+		cout << value << ' ';
+		value += increment;
+	}
+	cout << "\nStack is full. Cannot push " << value
+		<< "\n\nPopping elements from " << stackName << '\n';
+
+	while (theStack.pop(value)) {
+		cout << value << ' ';
+	}
+	cout << "\nStack is empty. Cannot pop" << endl;
+}
 
 int main() {
 
 	Stack <double> doubleStack(5);
-	double doubleValue = 1.1;
-
-	cout << "Pushing elements onto doubleStack\n";
-	// push 5 doubles onto doubleStack
-	while (doubleStack.push(doubleValue)) {
-		cout << doubleValue << ' ';
-		doubleValue += 1.1;
-	}
-
-	cout << "\nStack is full. Cannot push " << doubleValue
-		<< "\n\nPopping elements from doubleStack\n";
-	while (doubleStack.pop(doubleValue)) {
-		cout << doubleValue << ' ';
-	}
-	cout << "\nStack is empty. Cannot pop\n";
-
-
 	Stack <int> intStack; // default size 10
-	int intValue = 1;
 
-	cout << "\nPushing elements onto intStack\n"; 	
-	while (intStack.push(intValue)) {
-		cout << intValue++ << ' ';
-	}
-	cout << "\nStack is full. Cannot push " << intValue
-		<< "\n\nPopping elements from intStack\n";
-
-	while (intStack.pop(intValue)) {
-		cout << intValue << ' ';
-	}
-	cout << "\nStack is empty. Cannot pop" << endl;
-
+	testStack(doubleStack, 1.1, 1.1, "double stack");
+	testStack(intStack, 1, 1, "int stack");
+	
 	cin.get();
 	return 0;
 }
