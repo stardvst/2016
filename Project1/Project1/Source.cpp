@@ -2,24 +2,33 @@
 using namespace std;
 
 template <typename T>
-void printArray(const T *const array, int count) {
-	for (int i = 0; i< count; i++) {
-		cout << array[i] << " ";
-	}
-	cout << endl;
+bool isEqualTo(const T &op1, const T &op2) {
+	return op1 == op2;
 }
 
-void printArray(const char *const array, int count) {
-	for (int i = 0; i < count; i++) {
-		cout << array[i] << " ";
+class IntNumber {
+
+	// the example won't work without this friend function 
+	// because the compiler won't know how to compare two IntNumbers
+	friend bool operator==(const IntNumber &n1, const IntNumber &n2) {
+		return n1.number == n2.number;
 	}
-	cout << endl;
-}
+
+public:
+	explicit IntNumber(int num = 5) {
+		number = num;
+	}
+private:
+	int number;
+};
 
 int main() {
 
-	char *arrayOfChar[] = { "Happy", "New", "Year" };
-	printArray(arrayOfChar, 3);
+	IntNumber number1(6);
+	IntNumber number2;
+
+	cout << "num1==num2? " << boolalpha << isEqualTo(number1, number2) <<
+		"\nnum1!=num2? " << boolalpha << !isEqualTo(number1, number2) << endl;
 
 	system("pause");
 	return 0;
