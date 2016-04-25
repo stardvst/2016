@@ -1,34 +1,36 @@
 #include <iostream>
+#include "DivideByZeroException.h"
 using namespace std;
 
-template <typename T>
-bool isEqualTo(const T &op1, const T &op2) {
-	return op1 == op2;
+double quotient(int numerator, int denominator) {
+	if (denominator == 0) {
+		throw DivideByZeroException();
+	}
+	return static_cast<double>(numerator) / denominator;
 }
-
-class IntNumber {
-
-	// the example won't work without this friend function 
-	// because the compiler won't know how to compare two IntNumbers
-	friend bool operator==(const IntNumber &n1, const IntNumber &n2) {
-		return n1.number == n2.number;
-	}
-
-public:
-	explicit IntNumber(int num = 5) {
-		number = num;
-	}
-private:
-	int number;
-};
 
 int main() {
 
-	IntNumber number1(6);
-	IntNumber number2;
+	int number1;
+	int number2;
+	double result;
 
-	cout << "num1==num2? " << boolalpha << isEqualTo(number1, number2) <<
-		"\nnum1!=num2? " << boolalpha << !isEqualTo(number1, number2) << endl;
+	cout << "Enter two integers (end-of-file to end): ";
+
+	while (cin >> number1 >> number2) {
+
+		try {
+			result = quotient(number1, number2);
+			cout << "The quotient is: " << result << endl;
+		}
+		catch(DivideByZeroException &divideByZeroException) {
+			cout << "Exception occurred: " <<
+				divideByZeroException.what() << endl;
+		}
+
+		cout << "\nEnter two integers (end-of-file to end): ";
+	}
+	
 
 	system("pause");
 	return 0;

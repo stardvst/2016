@@ -118,6 +118,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Account.cpp" />
+    <ClCompile Include="Array.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CheckingAccount.cpp" />
     <ClCompile Include="Circle.cpp" />
@@ -134,14 +135,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h" />
+    <ClInclude Include="Array.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="CheckingAccount.h" />
     <ClInclude Include="Circle.h" />
     <ClInclude Include="DeckOfCards.h" />
+    <ClInclude Include="DivideByZeroException.h" />
     <ClInclude Include="HugeInteger.h" />
     <ClInclude Include="IntegerSet.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="SavingsAccount.h" />
     <ClInclude Include="Shape.h" />
     <ClInclude Include="Square.h" />
@@ -150,6 +154,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Project1.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
