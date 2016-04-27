@@ -140,7 +140,6 @@
     <ClInclude Include="CheckingAccount.h" />
     <ClInclude Include="Circle.h" />
     <ClInclude Include="DeckOfCards.h" />
-    <ClInclude Include="DivideByZeroException.h" />
     <ClInclude Include="HugeInteger.h" />
     <ClInclude Include="IntegerSet.h" />
     <ClInclude Include="Point.h" />

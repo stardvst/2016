@@ -1,37 +1,40 @@
 #include <iostream>
-#include "DivideByZeroException.h"
+#include <iomanip>
 using namespace std;
 
-double quotient(int numerator, int denominator) {
-	if (denominator == 0) {
-		throw DivideByZeroException();
-	}
-	return static_cast<double>(numerator) / denominator;
-}
 
 int main() {
-
-	int number1;
-	int number2;
-	double result;
-
-	cout << "Enter two integers (end-of-file to end): ";
-
-	while (cin >> number1 >> number2) {
-
-		try {
-			result = quotient(number1, number2);
-			cout << "The quotient is: " << result << endl;
-		}
-		catch(DivideByZeroException &divideByZeroException) {
-			cout << "Exception occurred: " <<
-				divideByZeroException.what() << endl;
-		}
-
-		cout << "\nEnter two integers (end-of-file to end): ";
-	}
 	
+	const int arraySize = 10;
+	int data[arraySize] = { 34, 56, 4, 10, 77, 51, 93, 30, 5, 52 };
+	int insert;
 
-	system("pause");
+
+	cout << "Unsorted array:\n";
+	for (int i = 0; i < arraySize; ++i) {
+		cout << setw(4) << data[i];
+	}
+		
+	/* insertion sort */
+	for (int next = 1; next < arraySize; ++next) {
+		insert = data[next]; // store the value in the current element
+		int moveItem = next; // initialize location to place element
+
+		// search for the location in which to put the current element
+		while ((moveItem > 0) && (data[moveItem - 1] > insert)) { 
+			data[moveItem] = data[moveItem - 1]; // shift element one slot to the right
+			moveItem--;
+		}
+
+		data[moveItem] = insert; // place inserted element into the array
+	}
+
+	cout << "\nSorted array:\n";
+	for (int i = 0; i < arraySize; ++i) {
+		cout << setw(4) << data[i];
+	}
+
+
+	cin.get();
 	return 0;
 }
