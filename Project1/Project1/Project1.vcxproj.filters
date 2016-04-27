@@ -60,6 +60,9 @@
     <ClCompile Include="Array.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Integer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IntegerSet.h">
@@ -108,6 +111,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Integer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

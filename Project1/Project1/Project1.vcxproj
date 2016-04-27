@@ -124,6 +124,7 @@
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="DeckOfCards.cpp" />
     <ClCompile Include="HugeInteger.cpp" />
+    <ClCompile Include="Integer.cpp" />
     <ClCompile Include="IntegerSet.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Rectangle.cpp" />
@@ -141,6 +142,7 @@
     <ClInclude Include="Circle.h" />
     <ClInclude Include="DeckOfCards.h" />
     <ClInclude Include="HugeInteger.h" />
+    <ClInclude Include="Integer.h" />
     <ClInclude Include="IntegerSet.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Rectangle.h" />
