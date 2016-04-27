@@ -1,39 +1,32 @@
 #include <iostream>
-#include <iomanip>
+#include <stdexcept>
 using namespace std;
 
+void function3() throw (runtime_error){
+	cout << "In function 3" << endl;
+	throw runtime_error("runtime_error in function3");
+}
+
+void function2() throw (runtime_error) {
+	cout << "function3 is called inside function2" << endl;
+	function3();
+}
+
+void function1() throw (runtime_error) {
+	cout << "function2 is called inside function1" << endl;
+	function2();
+}
 
 int main() {
 	
-	const int arraySize = 10;
-	int data[arraySize] = { 34, 56, 4, 10, 77, 51, 93, 30, 5, 52 };
-	int insert;
-
-
-	cout << "Unsorted array:\n";
-	for (int i = 0; i < arraySize; ++i) {
-		cout << setw(4) << data[i];
+	try {
+		cout << "function1 is called inside main" << endl;
+		function1();
 	}
-		
-	/* insertion sort */
-	for (int next = 1; next < arraySize; ++next) {
-		insert = data[next]; // store the value in the current element
-		int moveItem = next; // initialize location to place element
-
-		// search for the location in which to put the current element
-		while ((moveItem > 0) && (data[moveItem - 1] > insert)) { 
-			data[moveItem] = data[moveItem - 1]; // shift element one slot to the right
-			moveItem--;
-		}
-
-		data[moveItem] = insert; // place inserted element into the array
+	catch(runtime_error &error) {
+		cout << "Exception occurred: " << error.what() << endl;
+		cout << "Exception handled in main" << endl;
 	}
-
-	cout << "\nSorted array:\n";
-	for (int i = 0; i < arraySize; ++i) {
-		cout << setw(4) << data[i];
-	}
-
 
 	cin.get();
 	return 0;
