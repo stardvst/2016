@@ -1,32 +1,23 @@
 #include <iostream>
-#include <stdexcept>
+#include <new>
 using namespace std;
 
-void function3() throw (runtime_error){
-	cout << "In function 3" << endl;
-	throw runtime_error("runtime_error in function3");
-}
-
-void function2() throw (runtime_error) {
-	cout << "function3 is called inside function2" << endl;
-	function3();
-}
-
-void function1() throw (runtime_error) {
-	cout << "function2 is called inside function1" << endl;
-	function2();
-}
 
 int main() {
 	
+	double *ptr[50];
+
 	try {
-		cout << "function1 is called inside main" << endl;
-		function1();
+		for (int i = 0; i < 50; ++i) {
+			ptr[i] = new double[50000000];
+			cout << "ptr[" << i << "] points to 50,000,000 new doubles\n";
+		}
 	}
-	catch(runtime_error &error) {
-		cout << "Exception occurred: " << error.what() << endl;
-		cout << "Exception handled in main" << endl;
+	catch(bad_alloc &memoryAllocationException) {
+		cerr << "Exception occurred: "
+			<< memoryAllocationException.what() << endl;
 	}
+
 
 	cin.get();
 	return 0;
