@@ -1,19 +1,29 @@
 #include <iostream>
-#include <memory>
-#include "Integer.h"
+#include <string>
+#include <fstream>
+#include <cstdlib>
 using namespace std;
 
 
 int main() {
 	
-	cout << "Creating a unique_ptr object that points to an Integer\n";
+	ofstream outClientFile("clients.txt", ios::app);
+	if (!outClientFile) {
+		cerr << "File could not be opened" << endl;
+		exit(1);
+	}
 	
-	unique_ptr<Integer> ptrToInteger(new Integer(7));
+	cout << "Enter the account, name, and balance." << endl
+		<< "Enter end-of-file to end input.\n? ";
 
-	cout << "\nUsing the unique_ptr to manipulate the Integer\n";
-	ptrToInteger->setInteger(99);
+	int account;
+	string name;
+	double balance;
 
-	cout << "Integer after setInteger: " << (*ptrToInteger).getInteger() << endl;
+	while (cin >> account >> name >> balance) {
+		outClientFile << account << ' ' << name << ' ' << balance << endl;
+		cout << "? ";
+	}
 
 	cin.get();
 	return 0;
