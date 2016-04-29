@@ -144,6 +144,8 @@
     <ClInclude Include="HugeInteger.h" />
     <ClInclude Include="Integer.h" />
     <ClInclude Include="IntegerSet.h" />
+    <ClInclude Include="List.h" />
+    <ClInclude Include="ListNode.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="resource.h" />
