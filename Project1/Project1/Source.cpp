@@ -1,66 +1,70 @@
-#include <iostream>
-#include <string>
-#include "List.h"
-using namespace std;
+#include <stdio.h>
+#include <limits.h>
+#include <math.h> 
 
-void instructions() {
-	cout << "Enter one of the following:\n"
-		<< " 1 to insert at beginning of list\n"
-		<< " 2 to insert at end of list\n"
-		<< " 3 to delete from beginning of list\n"
-		<< " 4 to delete from end of list\n"
-		<< " 5 to end list processing\n";
+int maxint(int i) {
+	if (i >= INT_MAX) {
+		throw "i > MAXINT";
+	}
+	return i;
 }
 
-template <typename T> 
-void testList(List<T> &listObject, const string &typeName) {
-	cout << "Testing a List of " << typeName << " values\n";
-	instructions();
+float div1(float x, float y) {
+	if (y == 0) {
+		throw "Error: float y = 0";
+	}
+	return x / y;
+}
 
-	int choice;
-	T value;
+float div2(float x, float y) {
+	if (y == INFINITY) {
+		throw "Error: y = INF";
+	}
+	return x / y;
+}
 
-	do {
-		cout << "? ";
-		cin >> choice;
-		switch (choice) {
-		case 1:
-			cout << "Enter " << typeName << ": ";
-			cin >> value;
-			listObject.insertAtFront(value);
-			listObject.print();
-			break;
-		case 2:
-			cout << "Enter " << typeName << ": ";
-			cin >> value;
-			listObject.insertAtBack(value);
-			listObject.print();
-			break;
-		case 3:
-			if (listObject.removeFromFront(value)) {
-				cout << value << " removed from list\n";
-			}
-			listObject.print();
-			break;
-		case 4:
-			if (listObject.removeFromBack(value)) {
-				cout << value << " removed from list\n";
-			}
-			listObject.print();
-			break;
-		}
-	} while (choice < 5);
-
+float div3(int x, int y) {
+	if (y == 0) {
+		throw "Error: int y = 0";
+	}
+	return (float)x / y;
 }
 
 int main() {
 
-	List<int> integerList;
-	testList(integerList, "integer");
+	try {
+		int a = maxint(INT_MAX);
+	}
+	catch (const char *msg) {
+		printf("%s\n\n", msg);
+	}
 
-	List<double> doubleList;
-	testList(doubleList, "double");
 
-	cin.get();
+
+	try {
+		int b = div1(5.0, 0);
+	}
+	catch (const char *msg) {
+		printf("%s\n\n", msg);
+	}
+
+
+
+	try {
+		int c = div2(5.0, INFINITY);
+	}
+	catch (const char *msg) {
+		printf("%s\n\n", msg);
+	}
+
+
+	try {
+		int d = div3(5, 0);
+	}
+	catch (const char *msg) {
+		printf("%s\n\n", msg);
+	}
+
+
 	return 0;
 }
